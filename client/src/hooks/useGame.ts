@@ -36,6 +36,11 @@ export interface GameState {
   timeRemaining: number;
   /** ISO3 del pais a fer flaix al globus. Es neteja automàticament a 1.5s. */
   flashCountryId: string | null;
+  flashLabel: string | null;
+  flashByPlayerId: string | null;
+  flashLabelToken: number;
+  flashLabelDurationMs: number;
+  flashLabelUntilRoundEnd: boolean;
   /** Feedback immediat per a l'alumne: null, "correct" o "incorrect" */
   answerFeedback: "correct" | "incorrect" | null;
   /** Punts guanyats a l'últim encert (per mostrar animació) */
@@ -57,6 +62,9 @@ type GameAction =
       playerId: string;
       isCorrect: boolean;
       flashCountryId?: string;
+      flashLabel?: string;
+      flashLabelDurationMs?: number;
+      flashLabelUntilRoundEnd?: boolean;
       points: number;
       totalScore: number;
     }
@@ -64,6 +72,7 @@ type GameAction =
   | { type: "TIMER_TICK"; remaining: number }
   | { type: "GAME_END"; result: GameResult }
   | { type: "FLASH_CLEAR" }
+  | { type: "FLASH_LABEL_CLEAR" }
   | { type: "FEEDBACK_CLEAR" }
   | { type: "ERROR"; message: string }
   | { type: "RESET" };
@@ -81,6 +90,11 @@ const initialState: GameState = {
   myScore: 0,
   timeRemaining: 0,
   flashCountryId: null,
+  flashLabel: null,
+  flashByPlayerId: null,
+  flashLabelToken: 0,
+  flashLabelDurationMs: 0,
+  flashLabelUntilRoundEnd: false,
   answerFeedback: null,
   lastPointsEarned: 0,
   isHost: false,
@@ -134,6 +148,10 @@ function reducer(state: GameState, action: GameAction): GameState {
         answerFeedback: null,
         lastPointsEarned: 0,
         flashCountryId: null,
+        flashLabel: null,
+        flashByPlayerId: null,
+        flashLabelUntilRoundEnd: false,
+        flashLabelDurationMs: 0,
         error: null,
       };
     case "ANSWER_RESULT":
@@ -143,6 +161,11 @@ function reducer(state: GameState, action: GameAction): GameState {
           player.id === action.playerId ? { ...player, score: action.totalScore } : player
         ),
         flashCountryId: action.flashCountryId ?? null,
+        flashLabel: action.flashLabel ?? null,
+        flashByPlayerId: action.flashLabel ? action.playerId : null,
+        flashLabelToken: action.flashLabel ? state.flashLabelToken + 1 : state.flashLabelToken,
+        flashLabelDurationMs: action.flashLabelDurationMs ?? 0,
+        flashLabelUntilRoundEnd: action.flashLabelUntilRoundEnd ?? false,
         answerFeedback: action.isCorrect ? "correct" : "incorrect",
         lastPointsEarned: action.points,
         myScore:
@@ -155,6 +178,10 @@ function reducer(state: GameState, action: GameAction): GameState {
         roundResult: action.result,
         timeRemaining: 0,
         answerFeedback: null,
+        flashLabel: null,
+        flashByPlayerId: null,
+        flashLabelUntilRoundEnd: false,
+        flashLabelDurationMs: 0,
       };
     case "TIMER_TICK":
       return { ...state, timeRemaining: action.remaining };
@@ -168,6 +195,14 @@ function reducer(state: GameState, action: GameAction): GameState {
       };
     case "FLASH_CLEAR":
       return { ...state, flashCountryId: null };
+    case "FLASH_LABEL_CLEAR":
+      return {
+        ...state,
+        flashLabel: null,
+        flashByPlayerId: null,
+        flashLabelUntilRoundEnd: false,
+        flashLabelDurationMs: 0,
+      };
     case "FEEDBACK_CLEAR":
       return { ...state, answerFeedback: null, lastPointsEarned: 0 };
     case "ERROR":
@@ -220,6 +255,7 @@ export function useGame(
   };
 } {
   const pendingJoinCodeRef = useRef<string | null>(null);
+  const flashLabelTimeoutRef = useRef<number | null>(null);
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     isHost,
@@ -273,11 +309,29 @@ export function useGame(
         playerId: payload.playerId,
         isCorrect: payload.isCorrect,
         flashCountryId: payload.flashCountryId,
+        flashLabel: payload.flashLabel,
+        flashLabelDurationMs: payload.flashLabelDurationMs,
+        flashLabelUntilRoundEnd: payload.flashLabelUntilRoundEnd,
         points: payload.points,
         totalScore: payload.totalScore,
       });
       if (payload.flashCountryId) {
         window.setTimeout(() => dispatch({ type: "FLASH_CLEAR" }), 1500);
+      }
+      if (payload.flashLabel) {
+        if (flashLabelTimeoutRef.current !== null) {
+          window.clearTimeout(flashLabelTimeoutRef.current);
+          flashLabelTimeoutRef.current = null;
+        }
+        if (!payload.flashLabelUntilRoundEnd) {
+          const duration = Math.max(0, payload.flashLabelDurationMs ?? 0);
+          if (duration > 0) {
+            flashLabelTimeoutRef.current = window.setTimeout(() => {
+              dispatch({ type: "FLASH_LABEL_CLEAR" });
+              flashLabelTimeoutRef.current = null;
+            }, duration);
+          }
+        }
       }
       window.setTimeout(() => dispatch({ type: "FEEDBACK_CLEAR" }), 2000);
     };
@@ -319,6 +373,10 @@ export function useGame(
       socket.off("game:round-end", handleRoundEnd);
       socket.off("game:timer-tick", handleTimerTick);
       socket.off("game:end", handleGameEnd);
+      if (flashLabelTimeoutRef.current !== null) {
+        window.clearTimeout(flashLabelTimeoutRef.current);
+        flashLabelTimeoutRef.current = null;
+      }
     };
   }, [socket, state.currentRound?.index, state.players, state.roomCode]);
 

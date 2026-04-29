@@ -47,11 +47,28 @@ export const HostLobby: FC<HostLobbyProps> = ({
     if (next.length > 0) onConfigChange({ continents: next });
   };
 
+  const handleTimePerRoundChange = (nextTimePerRound: number) => {
+    const nextGuessLabelSeconds = Math.min(config.guessLabelSeconds, nextTimePerRound);
+    onConfigChange({
+      timePerRound: nextTimePerRound,
+      guessLabelSeconds: nextGuessLabelSeconds,
+    });
+  };
+
   return (
     <main className="host-lobby">
       <section className="host-lobby__left">
         <section className="panel room-code-panel">
-          <p className="eyebrow">Codi de sala</p>
+          <div className="room-code-panel__top">
+            <p className="eyebrow">Codi de sala</p>
+            <Button
+              size="sm"
+              onClick={onStartGame}
+              disabled={connectedPlayers.length < 1 || config.continents.length < 1}
+            >
+              Iniciar
+            </Button>
+          </div>
           <h1>{roomCode}</h1>
           <Button variant="secondary" onClick={() => void navigator.clipboard?.writeText(roomCode)}>
             Copiar
@@ -117,7 +134,19 @@ export const HostLobby: FC<HostLobbyProps> = ({
             min={10}
             max={120}
             value={config.timePerRound}
-            onChange={(event) => onConfigChange({ timePerRound: Number(event.target.value) })}
+            onChange={(event) => handleTimePerRoundChange(Number(event.target.value))}
+          />
+          <Input
+            label={
+              config.guessLabelUntilRoundEnd
+                ? "Etiqueta resposta: fins final de ronda"
+                : `Etiqueta resposta: ${config.guessLabelSeconds}s`
+            }
+            type="range"
+            min={0}
+            max={config.timePerRound}
+            value={config.guessLabelSeconds}
+            onChange={(event) => onConfigChange({ guessLabelSeconds: Number(event.target.value) })}
           />
         </div>
 
@@ -170,13 +199,14 @@ export const HostLobby: FC<HostLobbyProps> = ({
           />
           Auto-rotar globus
         </label>
-        <Button
-          size="lg"
-          onClick={onStartGame}
-          disabled={connectedPlayers.length < 1 || config.continents.length < 1}
-        >
-          Iniciar Partida
-        </Button>
+        <label className="check-row">
+          <input
+            type="checkbox"
+            checked={config.guessLabelUntilRoundEnd}
+            onChange={(event) => onConfigChange({ guessLabelUntilRoundEnd: event.target.checked })}
+          />
+          Mantenir etiqueta fins final de ronda
+        </label>
       </section>
     </main>
   );

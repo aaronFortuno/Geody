@@ -1,0 +1,1962 @@
+[
+  {
+    "id": "ABW",
+    "capital": "Oranjestad",
+    "coordinates": {
+      "lat": 12.52,
+      "lng": -70.03
+    }
+  },
+  {
+    "id": "AFG",
+    "capital": "Kabul",
+    "coordinates": {
+      "lat": 34.52,
+      "lng": 69.18
+    }
+  },
+  {
+    "id": "AGO",
+    "capital": "Luanda",
+    "coordinates": {
+      "lat": -8.83,
+      "lng": 13.22
+    }
+  },
+  {
+    "id": "AIA",
+    "capital": "The Valley",
+    "coordinates": {
+      "lat": 18.22,
+      "lng": -63.05
+    }
+  },
+  {
+    "id": "ALA",
+    "capital": "Mariehamn",
+    "coordinates": {
+      "lat": 60.12,
+      "lng": 19.9
+    }
+  },
+  {
+    "id": "ALB",
+    "capital": "Tirana",
+    "coordinates": {
+      "lat": 41.32,
+      "lng": 19.82
+    }
+  },
+  {
+    "id": "AND",
+    "capital": "Andorra la Vella",
+    "coordinates": {
+      "lat": 42.5,
+      "lng": 1.52
+    }
+  },
+  {
+    "id": "ARE",
+    "capital": "Abu Dhabi",
+    "coordinates": {
+      "lat": 24.47,
+      "lng": 54.37
+    }
+  },
+  {
+    "id": "ARG",
+    "capital": "Buenos Aires",
+    "coordinates": {
+      "lat": -34.58,
+      "lng": -58.67
+    }
+  },
+  {
+    "id": "ARM",
+    "capital": "Yerevan",
+    "coordinates": {
+      "lat": 40.17,
+      "lng": 44.5
+    }
+  },
+  {
+    "id": "ASM",
+    "capital": "Pago Pago",
+    "coordinates": {
+      "lat": -14.27,
+      "lng": -170.7
+    }
+  },
+  {
+    "id": "ATF",
+    "capital": "Port-aux-Français",
+    "coordinates": {
+      "lat": 48.81,
+      "lng": -1.4
+    }
+  },
+  {
+    "id": "ATG",
+    "capital": "Saint John's",
+    "coordinates": {
+      "lat": 17.12,
+      "lng": -61.85
+    }
+  },
+  {
+    "id": "AUS",
+    "capital": "Canberra",
+    "coordinates": {
+      "lat": -35.27,
+      "lng": 149.13
+    }
+  },
+  {
+    "id": "AUT",
+    "capital": "Vienna",
+    "coordinates": {
+      "lat": 48.2,
+      "lng": 16.37
+    }
+  },
+  {
+    "id": "AZE",
+    "capital": "Baku",
+    "coordinates": {
+      "lat": 40.38,
+      "lng": 49.87
+    }
+  },
+  {
+    "id": "BDI",
+    "capital": "Gitega",
+    "coordinates": {
+      "lat": -3.43,
+      "lng": 29.93
+    }
+  },
+  {
+    "id": "BEL",
+    "capital": "Brussels",
+    "coordinates": {
+      "lat": 50.83,
+      "lng": 4.33
+    }
+  },
+  {
+    "id": "BEN",
+    "capital": "Porto-Novo",
+    "coordinates": {
+      "lat": 6.48,
+      "lng": 2.62
+    }
+  },
+  {
+    "id": "BES",
+    "capital": "Kralendijk",
+    "coordinates": {
+      "lat": 12.14,
+      "lng": -68.27
+    }
+  },
+  {
+    "id": "BFA",
+    "capital": "Ouagadougou",
+    "coordinates": {
+      "lat": 12.37,
+      "lng": -1.52
+    }
+  },
+  {
+    "id": "BGD",
+    "capital": "Dhaka",
+    "coordinates": {
+      "lat": 23.72,
+      "lng": 90.4
+    }
+  },
+  {
+    "id": "BGR",
+    "capital": "Sofia",
+    "coordinates": {
+      "lat": 42.68,
+      "lng": 23.32
+    }
+  },
+  {
+    "id": "BHR",
+    "capital": "Manama",
+    "coordinates": {
+      "lat": 26.23,
+      "lng": 50.57
+    }
+  },
+  {
+    "id": "BHS",
+    "capital": "Nassau",
+    "coordinates": {
+      "lat": 25.08,
+      "lng": -77.35
+    }
+  },
+  {
+    "id": "BIH",
+    "capital": "Sarajevo",
+    "coordinates": {
+      "lat": 43.87,
+      "lng": 18.42
+    }
+  },
+  {
+    "id": "BLM",
+    "capital": "Gustavia",
+    "coordinates": {
+      "lat": 17.88,
+      "lng": -62.85
+    }
+  },
+  {
+    "id": "BLR",
+    "capital": "Minsk",
+    "coordinates": {
+      "lat": 53.9,
+      "lng": 27.57
+    }
+  },
+  {
+    "id": "BLZ",
+    "capital": "Belmopan",
+    "coordinates": {
+      "lat": 17.25,
+      "lng": -88.77
+    }
+  },
+  {
+    "id": "BMU",
+    "capital": "Hamilton",
+    "coordinates": {
+      "lat": 32.28,
+      "lng": -64.78
+    }
+  },
+  {
+    "id": "BOL",
+    "capital": "Sucre",
+    "coordinates": {
+      "lat": -19.02,
+      "lng": -65.26
+    }
+  },
+  {
+    "id": "BRA",
+    "capital": "Brasília",
+    "coordinates": {
+      "lat": -15.79,
+      "lng": -47.88
+    }
+  },
+  {
+    "id": "BRB",
+    "capital": "Bridgetown",
+    "coordinates": {
+      "lat": 13.1,
+      "lng": -59.62
+    }
+  },
+  {
+    "id": "BRN",
+    "capital": "Bandar Seri Begawan",
+    "coordinates": {
+      "lat": 4.88,
+      "lng": 114.93
+    }
+  },
+  {
+    "id": "BTN",
+    "capital": "Thimphu",
+    "coordinates": {
+      "lat": 27.47,
+      "lng": 89.63
+    }
+  },
+  {
+    "id": "BWA",
+    "capital": "Gaborone",
+    "coordinates": {
+      "lat": -24.63,
+      "lng": 25.9
+    }
+  },
+  {
+    "id": "CAF",
+    "capital": "Bangui",
+    "coordinates": {
+      "lat": 4.37,
+      "lng": 18.58
+    }
+  },
+  {
+    "id": "CAN",
+    "capital": "Ottawa",
+    "coordinates": {
+      "lat": 45.42,
+      "lng": -75.7
+    }
+  },
+  {
+    "id": "CCK",
+    "capital": "West Island",
+    "coordinates": {
+      "lat": -12.17,
+      "lng": 96.83
+    }
+  },
+  {
+    "id": "CHE",
+    "capital": "Bern",
+    "coordinates": {
+      "lat": 46.92,
+      "lng": 7.47
+    }
+  },
+  {
+    "id": "CHL",
+    "capital": "Santiago",
+    "coordinates": {
+      "lat": -33.45,
+      "lng": -70.67
+    }
+  },
+  {
+    "id": "CHN",
+    "capital": "Beijing",
+    "coordinates": {
+      "lat": 39.92,
+      "lng": 116.38
+    }
+  },
+  {
+    "id": "CIV",
+    "capital": "Yamoussoukro",
+    "coordinates": {
+      "lat": 6.82,
+      "lng": -5.27
+    }
+  },
+  {
+    "id": "CMR",
+    "capital": "Yaoundé",
+    "coordinates": {
+      "lat": 3.85,
+      "lng": 11.5
+    }
+  },
+  {
+    "id": "COD",
+    "capital": "Kinshasa",
+    "coordinates": {
+      "lat": -4.32,
+      "lng": 15.3
+    }
+  },
+  {
+    "id": "COG",
+    "capital": "Brazzaville",
+    "coordinates": {
+      "lat": -4.25,
+      "lng": 15.28
+    }
+  },
+  {
+    "id": "COK",
+    "capital": "Avarua",
+    "coordinates": {
+      "lat": -21.2,
+      "lng": -159.77
+    }
+  },
+  {
+    "id": "COL",
+    "capital": "Bogotá",
+    "coordinates": {
+      "lat": 4.71,
+      "lng": -74.07
+    }
+  },
+  {
+    "id": "COM",
+    "capital": "Moroni",
+    "coordinates": {
+      "lat": -11.7,
+      "lng": 43.23
+    }
+  },
+  {
+    "id": "CPV",
+    "capital": "Praia",
+    "coordinates": {
+      "lat": 14.92,
+      "lng": -23.52
+    }
+  },
+  {
+    "id": "CRI",
+    "capital": "San José",
+    "coordinates": {
+      "lat": 9.93,
+      "lng": -84.09
+    }
+  },
+  {
+    "id": "CUB",
+    "capital": "Havana",
+    "coordinates": {
+      "lat": 23.12,
+      "lng": -82.35
+    }
+  },
+  {
+    "id": "CUW",
+    "capital": "Willemstad",
+    "coordinates": {
+      "lat": 12.1,
+      "lng": -68.92
+    }
+  },
+  {
+    "id": "CXR",
+    "capital": "Flying Fish Cove",
+    "coordinates": {
+      "lat": -10.42,
+      "lng": 105.68
+    }
+  },
+  {
+    "id": "CYM",
+    "capital": "George Town",
+    "coordinates": {
+      "lat": 19.3,
+      "lng": -81.38
+    }
+  },
+  {
+    "id": "CYP",
+    "capital": "Nicosia",
+    "coordinates": {
+      "lat": 35.17,
+      "lng": 33.37
+    }
+  },
+  {
+    "id": "CZE",
+    "capital": "Prague",
+    "coordinates": {
+      "lat": 50.08,
+      "lng": 14.47
+    }
+  },
+  {
+    "id": "DEU",
+    "capital": "Berlin",
+    "coordinates": {
+      "lat": 52.52,
+      "lng": 13.4
+    }
+  },
+  {
+    "id": "DJI",
+    "capital": "Djibouti",
+    "coordinates": {
+      "lat": 11.58,
+      "lng": 43.15
+    }
+  },
+  {
+    "id": "DMA",
+    "capital": "Roseau",
+    "coordinates": {
+      "lat": 15.3,
+      "lng": -61.4
+    }
+  },
+  {
+    "id": "DNK",
+    "capital": "Copenhagen",
+    "coordinates": {
+      "lat": 55.67,
+      "lng": 12.58
+    }
+  },
+  {
+    "id": "DOM",
+    "capital": "Santo Domingo",
+    "coordinates": {
+      "lat": 18.47,
+      "lng": -69.9
+    }
+  },
+  {
+    "id": "DZA",
+    "capital": "Algiers",
+    "coordinates": {
+      "lat": 36.75,
+      "lng": 3.05
+    }
+  },
+  {
+    "id": "ECU",
+    "capital": "Quito",
+    "coordinates": {
+      "lat": -0.22,
+      "lng": -78.5
+    }
+  },
+  {
+    "id": "EGY",
+    "capital": "Cairo",
+    "coordinates": {
+      "lat": 30.05,
+      "lng": 31.25
+    }
+  },
+  {
+    "id": "ERI",
+    "capital": "Asmara",
+    "coordinates": {
+      "lat": 15.33,
+      "lng": 38.93
+    }
+  },
+  {
+    "id": "ESH",
+    "capital": "El Aaiún",
+    "coordinates": {
+      "lat": -13.28,
+      "lng": 27.14
+    }
+  },
+  {
+    "id": "ESP",
+    "capital": "Madrid",
+    "coordinates": {
+      "lat": 40.4,
+      "lng": -3.68
+    }
+  },
+  {
+    "id": "EST",
+    "capital": "Tallinn",
+    "coordinates": {
+      "lat": 59.43,
+      "lng": 24.72
+    }
+  },
+  {
+    "id": "ETH",
+    "capital": "Addis Ababa",
+    "coordinates": {
+      "lat": 9.03,
+      "lng": 38.7
+    }
+  },
+  {
+    "id": "FIN",
+    "capital": "Helsinki",
+    "coordinates": {
+      "lat": 60.17,
+      "lng": 24.93
+    }
+  },
+  {
+    "id": "FJI",
+    "capital": "Suva",
+    "coordinates": {
+      "lat": -18.13,
+      "lng": 178.42
+    }
+  },
+  {
+    "id": "FLK",
+    "capital": "Stanley",
+    "coordinates": {
+      "lat": -51.7,
+      "lng": -57.85
+    }
+  },
+  {
+    "id": "FRA",
+    "capital": "Paris",
+    "coordinates": {
+      "lat": 48.87,
+      "lng": 2.33
+    }
+  },
+  {
+    "id": "FRO",
+    "capital": "Tórshavn",
+    "coordinates": {
+      "lat": 62.01,
+      "lng": -6.77
+    }
+  },
+  {
+    "id": "FSM",
+    "capital": "Palikir",
+    "coordinates": {
+      "lat": 6.92,
+      "lng": 158.15
+    }
+  },
+  {
+    "id": "GAB",
+    "capital": "Libreville",
+    "coordinates": {
+      "lat": 0.38,
+      "lng": 9.45
+    }
+  },
+  {
+    "id": "GBR",
+    "capital": "London",
+    "coordinates": {
+      "lat": 51.5,
+      "lng": -0.08
+    }
+  },
+  {
+    "id": "GEO",
+    "capital": "Tbilisi",
+    "coordinates": {
+      "lat": 41.68,
+      "lng": 44.83
+    }
+  },
+  {
+    "id": "GGY",
+    "capital": "St. Peter Port",
+    "coordinates": {
+      "lat": 49.45,
+      "lng": -2.54
+    }
+  },
+  {
+    "id": "GHA",
+    "capital": "Accra",
+    "coordinates": {
+      "lat": 5.55,
+      "lng": -0.22
+    }
+  },
+  {
+    "id": "GIB",
+    "capital": "Gibraltar",
+    "coordinates": {
+      "lat": 36.13,
+      "lng": -5.35
+    }
+  },
+  {
+    "id": "GIN",
+    "capital": "Conakry",
+    "coordinates": {
+      "lat": 9.5,
+      "lng": -13.7
+    }
+  },
+  {
+    "id": "GLP",
+    "capital": "Basse-Terre",
+    "coordinates": {
+      "lat": 16.03,
+      "lng": -61.73
+    }
+  },
+  {
+    "id": "GMB",
+    "capital": "Banjul",
+    "coordinates": {
+      "lat": 13.45,
+      "lng": -16.57
+    }
+  },
+  {
+    "id": "GNB",
+    "capital": "Bissau",
+    "coordinates": {
+      "lat": 11.85,
+      "lng": -15.58
+    }
+  },
+  {
+    "id": "GNQ",
+    "capital": "Ciudad de la Paz",
+    "coordinates": {
+      "lat": 1.35,
+      "lng": 10.49
+    }
+  },
+  {
+    "id": "GRC",
+    "capital": "Athens",
+    "coordinates": {
+      "lat": 37.98,
+      "lng": 23.73
+    }
+  },
+  {
+    "id": "GRD",
+    "capital": "St. George's",
+    "coordinates": {
+      "lat": 32.38,
+      "lng": -64.68
+    }
+  },
+  {
+    "id": "GRL",
+    "capital": "Nuuk",
+    "coordinates": {
+      "lat": 64.18,
+      "lng": -51.75
+    }
+  },
+  {
+    "id": "GTM",
+    "capital": "Guatemala City",
+    "coordinates": {
+      "lat": 14.62,
+      "lng": -90.52
+    }
+  },
+  {
+    "id": "GUF",
+    "capital": "Cayenne",
+    "coordinates": {
+      "lat": 4.94,
+      "lng": -52.33
+    }
+  },
+  {
+    "id": "GUM",
+    "capital": "Hagåtña",
+    "coordinates": {
+      "lat": 13.48,
+      "lng": 144.75
+    }
+  },
+  {
+    "id": "GUY",
+    "capital": "Georgetown",
+    "coordinates": {
+      "lat": 6.8,
+      "lng": -58.15
+    }
+  },
+  {
+    "id": "HKG",
+    "capital": "City of Victoria",
+    "coordinates": {
+      "lat": 22.267,
+      "lng": 114.188
+    }
+  },
+  {
+    "id": "HND",
+    "capital": "Tegucigalpa",
+    "coordinates": {
+      "lat": 14.1,
+      "lng": -87.22
+    }
+  },
+  {
+    "id": "HRV",
+    "capital": "Zagreb",
+    "coordinates": {
+      "lat": 45.8,
+      "lng": 16
+    }
+  },
+  {
+    "id": "HTI",
+    "capital": "Port-au-Prince",
+    "coordinates": {
+      "lat": 18.53,
+      "lng": -72.33
+    }
+  },
+  {
+    "id": "HUN",
+    "capital": "Budapest",
+    "coordinates": {
+      "lat": 47.5,
+      "lng": 19.08
+    }
+  },
+  {
+    "id": "IDN",
+    "capital": "Jakarta",
+    "coordinates": {
+      "lat": -6.17,
+      "lng": 106.82
+    }
+  },
+  {
+    "id": "IMN",
+    "capital": "Douglas",
+    "coordinates": {
+      "lat": 54.15,
+      "lng": -4.48
+    }
+  },
+  {
+    "id": "IND",
+    "capital": "New Delhi",
+    "coordinates": {
+      "lat": 28.6,
+      "lng": 77.2
+    }
+  },
+  {
+    "id": "IOT",
+    "capital": "Diego Garcia",
+    "coordinates": {
+      "lat": -7.3,
+      "lng": 72.4
+    }
+  },
+  {
+    "id": "IRL",
+    "capital": "Dublin",
+    "coordinates": {
+      "lat": 53.32,
+      "lng": -6.23
+    }
+  },
+  {
+    "id": "IRN",
+    "capital": "Tehran",
+    "coordinates": {
+      "lat": 35.7,
+      "lng": 51.42
+    }
+  },
+  {
+    "id": "IRQ",
+    "capital": "Baghdad",
+    "coordinates": {
+      "lat": 33.33,
+      "lng": 44.4
+    }
+  },
+  {
+    "id": "ISL",
+    "capital": "Reykjavik",
+    "coordinates": {
+      "lat": 64.15,
+      "lng": -21.95
+    }
+  },
+  {
+    "id": "ISR",
+    "capital": "Jerusalem",
+    "coordinates": {
+      "lat": 31.77,
+      "lng": 35.23
+    }
+  },
+  {
+    "id": "ITA",
+    "capital": "Rome",
+    "coordinates": {
+      "lat": 41.9,
+      "lng": 12.48
+    }
+  },
+  {
+    "id": "JAM",
+    "capital": "Kingston",
+    "coordinates": {
+      "lat": 17.99702,
+      "lng": -76.79358
+    }
+  },
+  {
+    "id": "JEY",
+    "capital": "Saint Helier",
+    "coordinates": {
+      "lat": 49.18,
+      "lng": -2.1
+    }
+  },
+  {
+    "id": "JOR",
+    "capital": "Amman",
+    "coordinates": {
+      "lat": 31.95,
+      "lng": 35.93
+    }
+  },
+  {
+    "id": "JPN",
+    "capital": "Tokyo",
+    "coordinates": {
+      "lat": 35.68,
+      "lng": 139.75
+    }
+  },
+  {
+    "id": "KAZ",
+    "capital": "Astana",
+    "coordinates": {
+      "lat": 51.16,
+      "lng": 71.45
+    }
+  },
+  {
+    "id": "KEN",
+    "capital": "Nairobi",
+    "coordinates": {
+      "lat": -1.28,
+      "lng": 36.82
+    }
+  },
+  {
+    "id": "KGZ",
+    "capital": "Bishkek",
+    "coordinates": {
+      "lat": 42.87,
+      "lng": 74.6
+    }
+  },
+  {
+    "id": "KHM",
+    "capital": "Phnom Penh",
+    "coordinates": {
+      "lat": 11.55,
+      "lng": 104.92
+    }
+  },
+  {
+    "id": "KIR",
+    "capital": "South Tarawa",
+    "coordinates": {
+      "lat": 1.33,
+      "lng": 172.98
+    }
+  },
+  {
+    "id": "KNA",
+    "capital": "Basseterre",
+    "coordinates": {
+      "lat": 17.3,
+      "lng": -62.72
+    }
+  },
+  {
+    "id": "KOR",
+    "capital": "Seoul",
+    "coordinates": {
+      "lat": 37.55,
+      "lng": 126.98
+    }
+  },
+  {
+    "id": "KWT",
+    "capital": "Kuwait City",
+    "coordinates": {
+      "lat": 29.37,
+      "lng": 47.97
+    }
+  },
+  {
+    "id": "LAO",
+    "capital": "Vientiane",
+    "coordinates": {
+      "lat": 17.97,
+      "lng": 102.6
+    }
+  },
+  {
+    "id": "LBN",
+    "capital": "Beirut",
+    "coordinates": {
+      "lat": 33.87,
+      "lng": 35.5
+    }
+  },
+  {
+    "id": "LBR",
+    "capital": "Monrovia",
+    "coordinates": {
+      "lat": 6.3,
+      "lng": -10.8
+    }
+  },
+  {
+    "id": "LBY",
+    "capital": "Tripoli",
+    "coordinates": {
+      "lat": 32.88,
+      "lng": 13.17
+    }
+  },
+  {
+    "id": "LCA",
+    "capital": "Castries",
+    "coordinates": {
+      "lat": 14,
+      "lng": -61
+    }
+  },
+  {
+    "id": "LIE",
+    "capital": "Vaduz",
+    "coordinates": {
+      "lat": 47.13,
+      "lng": 9.52
+    }
+  },
+  {
+    "id": "LKA",
+    "capital": "Sri Jayawardenepura Kotte",
+    "coordinates": {
+      "lat": 6.89,
+      "lng": 79.9
+    }
+  },
+  {
+    "id": "LSO",
+    "capital": "Maseru",
+    "coordinates": {
+      "lat": -29.32,
+      "lng": 27.48
+    }
+  },
+  {
+    "id": "LTU",
+    "capital": "Vilnius",
+    "coordinates": {
+      "lat": 54.68,
+      "lng": 25.32
+    }
+  },
+  {
+    "id": "LUX",
+    "capital": "Luxembourg",
+    "coordinates": {
+      "lat": 49.6,
+      "lng": 6.12
+    }
+  },
+  {
+    "id": "LVA",
+    "capital": "Riga",
+    "coordinates": {
+      "lat": 56.95,
+      "lng": 24.1
+    }
+  },
+  {
+    "id": "MAF",
+    "capital": "Marigot",
+    "coordinates": {
+      "lat": 18.07,
+      "lng": -63.08
+    }
+  },
+  {
+    "id": "MAR",
+    "capital": "Rabat",
+    "coordinates": {
+      "lat": 34.02,
+      "lng": -6.82
+    }
+  },
+  {
+    "id": "MCO",
+    "capital": "Monaco",
+    "coordinates": {
+      "lat": 43.73,
+      "lng": 7.42
+    }
+  },
+  {
+    "id": "MDA",
+    "capital": "Chișinău",
+    "coordinates": {
+      "lat": 47.01,
+      "lng": 28.9
+    }
+  },
+  {
+    "id": "MDG",
+    "capital": "Antananarivo",
+    "coordinates": {
+      "lat": -18.92,
+      "lng": 47.52
+    }
+  },
+  {
+    "id": "MDV",
+    "capital": "Malé",
+    "coordinates": {
+      "lat": 4.17,
+      "lng": 73.51
+    }
+  },
+  {
+    "id": "MEX",
+    "capital": "Mexico City",
+    "coordinates": {
+      "lat": 19.43,
+      "lng": -99.13
+    }
+  },
+  {
+    "id": "MHL",
+    "capital": "Majuro",
+    "coordinates": {
+      "lat": 7.1,
+      "lng": 171.38
+    }
+  },
+  {
+    "id": "MKD",
+    "capital": "Skopje",
+    "coordinates": {
+      "lat": 42,
+      "lng": 21.43
+    }
+  },
+  {
+    "id": "MLI",
+    "capital": "Bamako",
+    "coordinates": {
+      "lat": 12.65,
+      "lng": -8
+    }
+  },
+  {
+    "id": "MLT",
+    "capital": "Valletta",
+    "coordinates": {
+      "lat": 35.88,
+      "lng": 14.5
+    }
+  },
+  {
+    "id": "MMR",
+    "capital": "Naypyidaw",
+    "coordinates": {
+      "lat": 19.76,
+      "lng": 96.07
+    }
+  },
+  {
+    "id": "MNE",
+    "capital": "Podgorica",
+    "coordinates": {
+      "lat": 42.43,
+      "lng": 19.27
+    }
+  },
+  {
+    "id": "MNG",
+    "capital": "Ulan Bator",
+    "coordinates": {
+      "lat": 47.92,
+      "lng": 106.91
+    }
+  },
+  {
+    "id": "MNP",
+    "capital": "Saipan",
+    "coordinates": {
+      "lat": 15.2,
+      "lng": 145.75
+    }
+  },
+  {
+    "id": "MOZ",
+    "capital": "Maputo",
+    "coordinates": {
+      "lat": -25.95,
+      "lng": 32.58
+    }
+  },
+  {
+    "id": "MRT",
+    "capital": "Nouakchott",
+    "coordinates": {
+      "lat": 18.07,
+      "lng": -15.97
+    }
+  },
+  {
+    "id": "MSR",
+    "capital": "Plymouth",
+    "coordinates": {
+      "lat": 16.7,
+      "lng": -62.22
+    }
+  },
+  {
+    "id": "MTQ",
+    "capital": "Fort-de-France",
+    "coordinates": {
+      "lat": 14.6,
+      "lng": -61.08
+    }
+  },
+  {
+    "id": "MUS",
+    "capital": "Port Louis",
+    "coordinates": {
+      "lat": -20.15,
+      "lng": 57.48
+    }
+  },
+  {
+    "id": "MWI",
+    "capital": "Lilongwe",
+    "coordinates": {
+      "lat": -13.97,
+      "lng": 33.78
+    }
+  },
+  {
+    "id": "MYS",
+    "capital": "Kuala Lumpur",
+    "coordinates": {
+      "lat": 3.17,
+      "lng": 101.7
+    }
+  },
+  {
+    "id": "MYT",
+    "capital": "Mamoudzou",
+    "coordinates": {
+      "lat": -12.78,
+      "lng": 45.22
+    }
+  },
+  {
+    "id": "NAM",
+    "capital": "Windhoek",
+    "coordinates": {
+      "lat": -22.57,
+      "lng": 17.08
+    }
+  },
+  {
+    "id": "NCL",
+    "capital": "Nouméa",
+    "coordinates": {
+      "lat": -22.27,
+      "lng": 166.45
+    }
+  },
+  {
+    "id": "NER",
+    "capital": "Niamey",
+    "coordinates": {
+      "lat": 13.52,
+      "lng": 2.12
+    }
+  },
+  {
+    "id": "NFK",
+    "capital": "Kingston",
+    "coordinates": {
+      "lat": -29.05,
+      "lng": 167.97
+    }
+  },
+  {
+    "id": "NGA",
+    "capital": "Abuja",
+    "coordinates": {
+      "lat": 9.08,
+      "lng": 7.53
+    }
+  },
+  {
+    "id": "NIC",
+    "capital": "Managua",
+    "coordinates": {
+      "lat": 12.13,
+      "lng": -86.25
+    }
+  },
+  {
+    "id": "NIU",
+    "capital": "Alofi",
+    "coordinates": {
+      "lat": -19.02,
+      "lng": -169.92
+    }
+  },
+  {
+    "id": "NLD",
+    "capital": "Amsterdam",
+    "coordinates": {
+      "lat": 52.35,
+      "lng": 4.92
+    }
+  },
+  {
+    "id": "NOR",
+    "capital": "Oslo",
+    "coordinates": {
+      "lat": 59.92,
+      "lng": 10.75
+    }
+  },
+  {
+    "id": "NPL",
+    "capital": "Kathmandu",
+    "coordinates": {
+      "lat": 27.72,
+      "lng": 85.32
+    }
+  },
+  {
+    "id": "NRU",
+    "capital": "Yaren",
+    "coordinates": {
+      "lat": -0.55,
+      "lng": 166.92
+    }
+  },
+  {
+    "id": "NZL",
+    "capital": "Wellington",
+    "coordinates": {
+      "lat": -41.3,
+      "lng": 174.78
+    }
+  },
+  {
+    "id": "OMN",
+    "capital": "Muscat",
+    "coordinates": {
+      "lat": 23.62,
+      "lng": 58.58
+    }
+  },
+  {
+    "id": "PAK",
+    "capital": "Islamabad",
+    "coordinates": {
+      "lat": 33.68,
+      "lng": 73.05
+    }
+  },
+  {
+    "id": "PAN",
+    "capital": "Panama City",
+    "coordinates": {
+      "lat": 8.97,
+      "lng": -79.53
+    }
+  },
+  {
+    "id": "PCN",
+    "capital": "Adamstown",
+    "coordinates": {
+      "lat": -25.07,
+      "lng": -130.08
+    }
+  },
+  {
+    "id": "PER",
+    "capital": "Lima",
+    "coordinates": {
+      "lat": -12.05,
+      "lng": -77.05
+    }
+  },
+  {
+    "id": "PHL",
+    "capital": "Manila",
+    "coordinates": {
+      "lat": 14.6,
+      "lng": 120.97
+    }
+  },
+  {
+    "id": "PLW",
+    "capital": "Ngerulmud",
+    "coordinates": {
+      "lat": 7.5,
+      "lng": 134.62
+    }
+  },
+  {
+    "id": "PNG",
+    "capital": "Port Moresby",
+    "coordinates": {
+      "lat": -9.45,
+      "lng": 147.18
+    }
+  },
+  {
+    "id": "POL",
+    "capital": "Warsaw",
+    "coordinates": {
+      "lat": 52.25,
+      "lng": 21
+    }
+  },
+  {
+    "id": "PRI",
+    "capital": "San Juan",
+    "coordinates": {
+      "lat": 18.47,
+      "lng": -66.12
+    }
+  },
+  {
+    "id": "PRK",
+    "capital": "Pyongyang",
+    "coordinates": {
+      "lat": 39.02,
+      "lng": 125.75
+    }
+  },
+  {
+    "id": "PRT",
+    "capital": "Lisbon",
+    "coordinates": {
+      "lat": 38.72,
+      "lng": -9.13
+    }
+  },
+  {
+    "id": "PRY",
+    "capital": "Asunción",
+    "coordinates": {
+      "lat": -25.28,
+      "lng": -57.57
+    }
+  },
+  {
+    "id": "PSE",
+    "capital": "Ramallah",
+    "coordinates": {
+      "lat": 31.9,
+      "lng": 35.2
+    }
+  },
+  {
+    "id": "PYF",
+    "capital": "Papeetē",
+    "coordinates": {
+      "lat": -17.53,
+      "lng": -149.56
+    }
+  },
+  {
+    "id": "QAT",
+    "capital": "Doha",
+    "coordinates": {
+      "lat": 25.28,
+      "lng": 51.53
+    }
+  },
+  {
+    "id": "REU",
+    "capital": "Saint-Denis",
+    "coordinates": {
+      "lat": -20.88,
+      "lng": 55.45
+    }
+  },
+  {
+    "id": "ROU",
+    "capital": "Bucharest",
+    "coordinates": {
+      "lat": 44.43,
+      "lng": 26.1
+    }
+  },
+  {
+    "id": "RUS",
+    "capital": "Moscow",
+    "coordinates": {
+      "lat": 55.75,
+      "lng": 37.6
+    }
+  },
+  {
+    "id": "RWA",
+    "capital": "Kigali",
+    "coordinates": {
+      "lat": -1.95,
+      "lng": 30.05
+    }
+  },
+  {
+    "id": "SAU",
+    "capital": "Riyadh",
+    "coordinates": {
+      "lat": 24.65,
+      "lng": 46.7
+    }
+  },
+  {
+    "id": "SDN",
+    "capital": "Khartoum",
+    "coordinates": {
+      "lat": 15.6,
+      "lng": 32.53
+    }
+  },
+  {
+    "id": "SEN",
+    "capital": "Dakar",
+    "coordinates": {
+      "lat": 14.73,
+      "lng": -17.63
+    }
+  },
+  {
+    "id": "SGP",
+    "capital": "Singapore",
+    "coordinates": {
+      "lat": 1.28,
+      "lng": 103.85
+    }
+  },
+  {
+    "id": "SGS",
+    "capital": "King Edward Point",
+    "coordinates": {
+      "lat": -54.28,
+      "lng": -36.5
+    }
+  },
+  {
+    "id": "SHN",
+    "capital": "Jamestown",
+    "coordinates": {
+      "lat": -15.93,
+      "lng": -5.72
+    }
+  },
+  {
+    "id": "SJM",
+    "capital": "Longyearbyen",
+    "coordinates": {
+      "lat": 78.22,
+      "lng": 15.63
+    }
+  },
+  {
+    "id": "SLB",
+    "capital": "Honiara",
+    "coordinates": {
+      "lat": -9.43,
+      "lng": 159.95
+    }
+  },
+  {
+    "id": "SLE",
+    "capital": "Freetown",
+    "coordinates": {
+      "lat": 8.48,
+      "lng": -13.23
+    }
+  },
+  {
+    "id": "SLV",
+    "capital": "San Salvador",
+    "coordinates": {
+      "lat": 13.7,
+      "lng": -89.2
+    }
+  },
+  {
+    "id": "SMR",
+    "capital": "City of San Marino",
+    "coordinates": {
+      "lat": 43.94,
+      "lng": 12.45
+    }
+  },
+  {
+    "id": "SOM",
+    "capital": "Mogadishu",
+    "coordinates": {
+      "lat": 2.07,
+      "lng": 45.33
+    }
+  },
+  {
+    "id": "SPM",
+    "capital": "Saint-Pierre",
+    "coordinates": {
+      "lat": 46.77,
+      "lng": -56.18
+    }
+  },
+  {
+    "id": "SRB",
+    "capital": "Belgrade",
+    "coordinates": {
+      "lat": 44.83,
+      "lng": 20.5
+    }
+  },
+  {
+    "id": "SSD",
+    "capital": "Juba",
+    "coordinates": {
+      "lat": 4.85,
+      "lng": 31.62
+    }
+  },
+  {
+    "id": "STP",
+    "capital": "São Tomé",
+    "coordinates": {
+      "lat": 0.34,
+      "lng": 6.73
+    }
+  },
+  {
+    "id": "SUR",
+    "capital": "Paramaribo",
+    "coordinates": {
+      "lat": 5.83,
+      "lng": -55.17
+    }
+  },
+  {
+    "id": "SVK",
+    "capital": "Bratislava",
+    "coordinates": {
+      "lat": 48.15,
+      "lng": 17.12
+    }
+  },
+  {
+    "id": "SVN",
+    "capital": "Ljubljana",
+    "coordinates": {
+      "lat": 46.05,
+      "lng": 14.52
+    }
+  },
+  {
+    "id": "SWE",
+    "capital": "Stockholm",
+    "coordinates": {
+      "lat": 59.33,
+      "lng": 18.05
+    }
+  },
+  {
+    "id": "SWZ",
+    "capital": "Mbabane",
+    "coordinates": {
+      "lat": -26.32,
+      "lng": 31.13
+    }
+  },
+  {
+    "id": "SXM",
+    "capital": "Philipsburg",
+    "coordinates": {
+      "lat": 18.02,
+      "lng": -63.03
+    }
+  },
+  {
+    "id": "SYC",
+    "capital": "Victoria",
+    "coordinates": {
+      "lat": -4.62,
+      "lng": 55.45
+    }
+  },
+  {
+    "id": "SYR",
+    "capital": "Damascus",
+    "coordinates": {
+      "lat": 33.5,
+      "lng": 36.3
+    }
+  },
+  {
+    "id": "TCA",
+    "capital": "Cockburn Town",
+    "coordinates": {
+      "lat": 21.46,
+      "lng": -71.14
+    }
+  },
+  {
+    "id": "TCD",
+    "capital": "N'Djamena",
+    "coordinates": {
+      "lat": 12.1,
+      "lng": 15.03
+    }
+  },
+  {
+    "id": "TGO",
+    "capital": "Lomé",
+    "coordinates": {
+      "lat": 6.14,
+      "lng": 1.21
+    }
+  },
+  {
+    "id": "THA",
+    "capital": "Bangkok",
+    "coordinates": {
+      "lat": 13.75,
+      "lng": 100.52
+    }
+  },
+  {
+    "id": "TJK",
+    "capital": "Dushanbe",
+    "coordinates": {
+      "lat": 38.55,
+      "lng": 68.77
+    }
+  },
+  {
+    "id": "TKL",
+    "capital": "Fakaofo",
+    "coordinates": {
+      "lat": -9.38,
+      "lng": -171.22
+    }
+  },
+  {
+    "id": "TKM",
+    "capital": "Ashgabat",
+    "coordinates": {
+      "lat": 37.95,
+      "lng": 58.38
+    }
+  },
+  {
+    "id": "TLS",
+    "capital": "Dili",
+    "coordinates": {
+      "lat": -8.58,
+      "lng": 125.6
+    }
+  },
+  {
+    "id": "TON",
+    "capital": "Nuku'alofa",
+    "coordinates": {
+      "lat": -21.13,
+      "lng": -175.2
+    }
+  },
+  {
+    "id": "TTO",
+    "capital": "Port of Spain",
+    "coordinates": {
+      "lat": 10.65,
+      "lng": -61.52
+    }
+  },
+  {
+    "id": "TUN",
+    "capital": "Tunis",
+    "coordinates": {
+      "lat": 36.8,
+      "lng": 10.18
+    }
+  },
+  {
+    "id": "TUR",
+    "capital": "Ankara",
+    "coordinates": {
+      "lat": 39.93,
+      "lng": 32.87
+    }
+  },
+  {
+    "id": "TUV",
+    "capital": "Funafuti",
+    "coordinates": {
+      "lat": -8.52,
+      "lng": 179.22
+    }
+  },
+  {
+    "id": "TWN",
+    "capital": "Taipei",
+    "coordinates": {
+      "lat": 25.03,
+      "lng": 121.52
+    }
+  },
+  {
+    "id": "TZA",
+    "capital": "Dodoma",
+    "coordinates": {
+      "lat": -6.16,
+      "lng": 35.75
+    }
+  },
+  {
+    "id": "UGA",
+    "capital": "Kampala",
+    "coordinates": {
+      "lat": 0.32,
+      "lng": 32.55
+    }
+  },
+  {
+    "id": "UKR",
+    "capital": "Kyiv",
+    "coordinates": {
+      "lat": 50.43,
+      "lng": 30.52
+    }
+  },
+  {
+    "id": "UNK",
+    "capital": "Pristina",
+    "coordinates": {
+      "lat": 42.67,
+      "lng": 21.17
+    }
+  },
+  {
+    "id": "URY",
+    "capital": "Montevideo",
+    "coordinates": {
+      "lat": -34.85,
+      "lng": -56.17
+    }
+  },
+  {
+    "id": "USA",
+    "capital": "Washington, D.C.",
+    "coordinates": {
+      "lat": 38.89,
+      "lng": -77.05
+    }
+  },
+  {
+    "id": "UZB",
+    "capital": "Tashkent",
+    "coordinates": {
+      "lat": 41.32,
+      "lng": 69.25
+    }
+  },
+  {
+    "id": "VAT",
+    "capital": "Vatican City",
+    "coordinates": {
+      "lat": 41.9,
+      "lng": 12.45
+    }
+  },
+  {
+    "id": "VCT",
+    "capital": "Kingstown",
+    "coordinates": {
+      "lat": 13.13,
+      "lng": -61.22
+    }
+  },
+  {
+    "id": "VEN",
+    "capital": "Caracas",
+    "coordinates": {
+      "lat": 10.48,
+      "lng": -66.87
+    }
+  },
+  {
+    "id": "VGB",
+    "capital": "Road Town",
+    "coordinates": {
+      "lat": 18.42,
+      "lng": -64.62
+    }
+  },
+  {
+    "id": "VIR",
+    "capital": "Charlotte Amalie",
+    "coordinates": {
+      "lat": 18.35,
+      "lng": -64.93
+    }
+  },
+  {
+    "id": "VNM",
+    "capital": "Hanoi",
+    "coordinates": {
+      "lat": 21.03,
+      "lng": 105.85
+    }
+  },
+  {
+    "id": "VUT",
+    "capital": "Port Vila",
+    "coordinates": {
+      "lat": -17.73,
+      "lng": 168.32
+    }
+  },
+  {
+    "id": "WLF",
+    "capital": "Mata-Utu",
+    "coordinates": {
+      "lat": -13.95,
+      "lng": -171.93
+    }
+  },
+  {
+    "id": "WSM",
+    "capital": "Apia",
+    "coordinates": {
+      "lat": -13.82,
+      "lng": -171.77
+    }
+  },
+  {
+    "id": "YEM",
+    "capital": "Sana'a",
+    "coordinates": {
+      "lat": 15.37,
+      "lng": 44.19
+    }
+  },
+  {
+    "id": "ZAF",
+    "capital": "Pretoria",
+    "coordinates": {
+      "lat": -25.7,
+      "lng": 28.22
+    }
+  },
+  {
+    "id": "ZMB",
+    "capital": "Lusaka",
+    "coordinates": {
+      "lat": -15.42,
+      "lng": 28.28
+    }
+  },
+  {
+    "id": "ZWE",
+    "capital": "Harare",
+    "coordinates": {
+      "lat": -17.82,
+      "lng": 31.03
+    }
+  }
+]

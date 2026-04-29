@@ -46,35 +46,50 @@ export const GameScreen: FC<GameScreenProps> = ({
 }) => {
   const round = state.currentRound;
   const totalRounds = config.totalRounds;
+  const flashByName =
+    state.flashByPlayerId
+      ? state.players.find((player) => player.id === state.flashByPlayerId)?.name
+      : null;
 
   return (
     <main className="game-screen">
       <section className="game-screen__stage">
         <div className="game-screen__topbar">
-          <span>
-            Ronda {round ? round.index + 1 : "-"} / {totalRounds}
-          </span>
+          <div className="game-screen__meta">
+            <span>
+              Ronda {round ? round.index + 1 : "-"} / {totalRounds}
+            </span>
+            {state.roomCode ? <span className="game-screen__room-code">Sala {state.roomCode}</span> : null}
+          </div>
           <Timer
             seconds={state.timeRemaining}
             total={config.timePerRound}
             urgent={state.timeRemaining <= 5}
           />
+          {!state.isHost && state.phase === "playing" ? (
+            <div className="game-screen__inline-answer">
+              <AnswerInput
+                disabled={!round}
+                onSubmit={onSubmitAnswer}
+                feedback={state.answerFeedback}
+                points={state.lastPointsEarned}
+              />
+            </div>
+          ) : null}
         </div>
         <div className="globe-shell">
           <Globe
             targetCountryId={round?.targetCountryId ?? state.roundResult?.targetCountryId}
             flashCountryId={state.flashCountryId ?? undefined}
+            roundType={round?.type}
             autoRotate={config.autoRotateGlobe}
+            flashLabel={state.flashLabel ?? undefined}
+            flashByName={flashByName ?? undefined}
+            flashLabelToken={state.flashLabelToken}
+            flashLabelDurationMs={state.flashLabelDurationMs}
+            flashLabelUntilRoundEnd={state.flashLabelUntilRoundEnd}
           />
         </div>
-        {!state.isHost && state.phase === "playing" ? (
-          <AnswerInput
-            disabled={!round}
-            onSubmit={onSubmitAnswer}
-            feedback={state.answerFeedback}
-            points={state.lastPointsEarned}
-          />
-        ) : null}
       </section>
 
       <aside className="game-screen__side">

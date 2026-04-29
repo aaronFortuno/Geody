@@ -127,6 +127,11 @@ a {
   font-size: 16px;
 }
 
+select.ui-input option {
+  color: #101722;
+  background: #ffffff;
+}
+
 .ui-input--error {
   border-color: var(--color-danger);
 }
@@ -211,12 +216,14 @@ a {
 }
 
 .host-lobby {
-  min-height: 100%;
+  min-height: 100dvh;
+  height: 100dvh;
   display: grid;
   grid-template-columns: minmax(320px, 0.9fr) minmax(460px, 1.3fr);
   gap: 18px;
   padding: 24px;
   background: var(--color-bg);
+  overflow: hidden;
 }
 
 .host-lobby__left {
@@ -227,8 +234,15 @@ a {
 
 .room-code-panel h1 {
   color: white;
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.1rem, 5vw, 4rem);
   letter-spacing: 0.08em;
+}
+
+.room-code-panel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .player-list, .stats-list {
@@ -257,6 +271,10 @@ a {
 
 .config-panel {
   align-content: start;
+  min-height: 0;
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+  overscroll-behavior: contain;
 }
 
 .config-grid {
@@ -298,42 +316,105 @@ a {
 }
 
 .game-screen {
-  height: 100%;
+  height: 100dvh;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
   gap: 16px;
   padding: 16px;
   background: var(--color-bg);
   color: white;
+  overflow: hidden;
 }
 
 .game-screen__stage {
   min-width: 0;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
   gap: 12px;
 }
 
 .game-screen__topbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) auto minmax(300px, 1.1fr);
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
   font-weight: 800;
 }
 
+.game-screen__meta {
+  display: grid;
+  gap: 4px;
+}
+
+.game-screen__room-code {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-screen__inline-answer .answer-input {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.game-screen__inline-answer .answer-input__feedback {
+  display: none;
+}
+
 .globe-shell {
   position: relative;
-  min-height: 420px;
+  min-height: 0;
   overflow: hidden;
   border-radius: 8px;
   background: #07111a;
+}
+
+.map-guess-label {
+  --guess-duration: 6000ms;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-width: 86px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(7, 18, 28, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #eef6ff;
+  transform: translateY(-8px);
+  animation: map-guess-fade var(--guess-duration) ease-in-out forwards;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.36);
+  white-space: nowrap;
+}
+
+.map-guess-label strong {
+  font-size: 0.9rem;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.map-guess-label span {
+  font-size: 0.72rem;
+  color: rgba(238, 246, 255, 0.8);
+}
+
+.map-guess-label--persistent {
+  animation: none;
+}
+
+@keyframes map-guess-fade {
+  0% { opacity: 0; transform: translateY(6px) scale(0.98); }
+  10% { opacity: 1; transform: translateY(0) scale(1); }
+  90% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-6px) scale(0.98); }
 }
 
 .game-screen__side {
   display: grid;
   gap: 16px;
   align-content: start;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .timer {
@@ -394,12 +475,15 @@ a {
   padding: 18px;
   border-radius: 8px;
   background: rgba(28, 43, 58, 0.94);
+  min-height: 0;
+  overflow: hidden;
 }
 
 .scoreboard ol {
   list-style: none;
   display: grid;
   gap: 8px;
+  overflow: hidden;
 }
 
 .scoreboard li {
@@ -510,24 +594,29 @@ a {
 @media (max-width: 1024px) {
   .host-lobby, .game-screen {
     grid-template-columns: 1fr;
-    overflow: auto;
+    overflow: hidden;
   }
 
   .config-grid {
     grid-template-columns: 1fr;
   }
 
-  html, body, #root {
-    overflow: auto;
-  }
-
   .game-screen {
-    min-height: 100%;
-    height: auto;
+    min-height: 100dvh;
+    height: 100dvh;
   }
 
   .globe-shell {
-    min-height: 58vh;
+    min-height: 0;
+  }
+
+  .game-screen__topbar {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .game-screen__inline-answer .answer-input {
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 }
 

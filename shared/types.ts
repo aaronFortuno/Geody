@@ -49,6 +49,8 @@ export interface GameConfig {
   gameType: "fastest" | "kahoot";
   allowAnswerChange: boolean;    // només mode "kahoot"
   autoRotateGlobe: boolean;
+  guessLabelSeconds: number;     // 0 = no mostrar, 1..timePerRound = segons visibles
+  guessLabelUntilRoundEnd: boolean;
 }
 
 export const DEFAULT_GAME_CONFIG: GameConfig = {
@@ -63,6 +65,8 @@ export const DEFAULT_GAME_CONFIG: GameConfig = {
   gameType: "fastest",
   allowAnswerChange: true,
   autoRotateGlobe: true,
+  guessLabelSeconds: 6,
+  guessLabelUntilRoundEnd: false,
 };
 
 // ─── Rondes i respostes ──────────────────────────────────────────────────────
@@ -170,6 +174,9 @@ export interface GameAnswerResultPayload {
   playerId: string;
   isCorrect: boolean;
   flashCountryId?: string;
+  flashLabel?: string;
+  flashLabelDurationMs?: number;
+  flashLabelUntilRoundEnd?: boolean;
   points: number;
   totalScore: number;
 }

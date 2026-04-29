@@ -552,11 +552,26 @@ export function handleGameAnswer(
     const countries = countryLoader.getCountriesForLocale(room.config.locale);
     const result = gameEngine.processAnswer(room, socket.id, payload.text, now, countries);
     room.touch();
+    const flashCountry = result.flashCountryId
+      ? countries.find((country) => country.id === result.flashCountryId)
+      : undefined;
+    const guessedLabel =
+      flashCountry?.names[room.config.locale]?.[round.type === "capital" ? "capital" : "country"];
+    const showGuessLabel =
+      Boolean(guessedLabel) &&
+      (room.config.guessLabelUntilRoundEnd || room.config.guessLabelSeconds > 0);
+    const flashLabel = showGuessLabel ? guessedLabel : undefined;
+    const flashLabelDurationMs = room.config.guessLabelUntilRoundEnd
+      ? undefined
+      : Math.max(0, Math.floor(room.config.guessLabelSeconds * 1000));
 
     io.to(code).emit("game:answer-result", {
       playerId: socket.id,
       isCorrect: result.isCorrect,
       flashCountryId: result.flashCountryId,
+      flashLabel,
+      flashLabelDurationMs,
+      flashLabelUntilRoundEnd: room.config.guessLabelUntilRoundEnd,
       points: result.points,
       totalScore: result.totalScore,
     });

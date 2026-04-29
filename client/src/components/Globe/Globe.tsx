@@ -1,6 +1,15 @@
-import { useEffect, useMemo, useRef, useState, type FC, type MutableRefObject, type RefObject } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type FC,
+  type MutableRefObject,
+  type RefObject,
+} from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { Html, OrbitControls } from "@react-three/drei";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import * as THREE from "three";
 import { geoEquirectangular, geoPath } from "d3-geo";
@@ -9,15 +18,48 @@ import type { GeoJSONCountryFeature } from "../../types/index.js";
 interface GlobeProps {
   targetCountryId?: string;
   flashCountryId?: string;
+  roundType?: "country" | "capital";
   autoRotate: boolean;
+  flashLabel?: string;
+  flashByName?: string;
+  flashLabelToken?: number;
+  flashLabelDurationMs?: number;
+  flashLabelUntilRoundEnd?: boolean;
   onCountryClick?: (countryId: string) => void;
 }
 
 const BORDER_RADIUS = 1.003;
 
-export const Globe: FC<GlobeProps> = ({ targetCountryId, flashCountryId, autoRotate, onCountryClick }) => {
+interface CountryPoint {
+  id: string;
+  coordinates: { lat: number; lng: number };
+}
+
+interface CapitalMarker {
+  position: [number, number, number];
+  quaternion: [number, number, number, number];
+  color: string;
+  headRadius: number;
+  stemLength: number;
+  stemRadius: number;
+  isTarget: boolean;
+}
+
+export const Globe: FC<GlobeProps> = ({
+  targetCountryId,
+  flashCountryId,
+  roundType,
+  autoRotate,
+  flashLabel,
+  flashByName,
+  flashLabelToken,
+  flashLabelDurationMs,
+  flashLabelUntilRoundEnd,
+  onCountryClick,
+}) => {
   void onCountryClick;
   const [features, setFeatures] = useState<GeoJSONCountryFeature[]>([]);
+  const [capitalPoints, setCapitalPoints] = useState<CountryPoint[]>([]);
   const controlsRef = useRef<OrbitControlsImpl | null>(null);
   const isInteractingRef = useRef(false);
   const targetVectorRef = useRef<THREE.Vector3 | null>(null);
@@ -37,12 +79,72 @@ export const Globe: FC<GlobeProps> = ({ targetCountryId, flashCountryId, autoRot
     };
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+    const baseUrl = import.meta.env.BASE_URL ?? "/";
+    const parsePoints = (
+      countries: Array<{ id: string; coordinates?: { lat: number; lng: number } }>
+    ): CountryPoint[] =>
+      countries
+        .filter((country): country is { id: string; coordinates: { lat: number; lng: number } } =>
+          Boolean(country.id && country.coordinates)
+        )
+        .map((country) => ({ id: country.id, coordinates: country.coordinates }));
+
+    fetch(`${baseUrl}data/capitals.json`)
+      .then(
+        (response) =>
+          response.json() as Promise<Array<{ id: string; coordinates?: { lat: number; lng: number } }>>
+      )
+      .then((capitals) => {
+        if (!cancelled) setCapitalPoints(parsePoints(capitals));
+      })
+      .catch(() =>
+        fetch(`${baseUrl}data/countries.json`)
+          .then(
+            (response) =>
+              response.json() as Promise<Array<{ id: string; coordinates?: { lat: number; lng: number } }>>
+          )
+          .then((countries) => {
+            if (!cancelled) setCapitalPoints(parsePoints(countries));
+          })
+          .catch((error) => console.error("Error carregant punts de capitals", error))
+      );
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const countryCenters = useMemo(() => buildCountryCenters(features), [features]);
+  const capitalPointMap = useMemo(
+    () =>
+      new Map(
+        capitalPoints.map((point) => [
+          point.id,
+          { lat: point.coordinates.lat, lng: point.coordinates.lng },
+        ])
+      ),
+    [capitalPoints]
+  );
+  const highlightedCountryId = roundType === "capital" ? undefined : targetCountryId;
   const mapTexture = useMemo(
-    () => createMapTexture(features, targetCountryId, flashCountryId),
-    [features, targetCountryId, flashCountryId]
+    () => createMapTexture(features, highlightedCountryId, flashCountryId),
+    [features, highlightedCountryId, flashCountryId]
   );
   const borderLines = useMemo(() => buildBorderLines(features), [features]);
+  const capitalMarkers = useMemo(
+    () => buildCapitalMarkers(capitalPoints, roundType === "capital" ? targetCountryId : undefined),
+    [capitalPoints, roundType, targetCountryId]
+  );
+  const flashLabelAnchor = useMemo(() => {
+    if (!flashCountryId || !flashLabel) return null;
+    const source = roundType === "capital" ? capitalPointMap : countryCenters;
+    const anchor = source.get(flashCountryId);
+    if (!anchor) return null;
+    const point = latLngToVector3(anchor.lat, anchor.lng, 1.05);
+    return [point.x, point.y, point.z] as [number, number, number];
+  }, [capitalPointMap, countryCenters, flashCountryId, flashLabel, roundType]);
   useEffect(() => () => mapTexture.dispose(), [mapTexture]);
 
   useEffect(() => {
@@ -73,6 +175,38 @@ export const Globe: FC<GlobeProps> = ({ targetCountryId, flashCountryId, autoRot
         {borderLines.map((line, index) => (
           <primitive key={index} object={line} />
         ))}
+        {capitalMarkers.map((marker, index) => (
+          <group key={index} position={marker.position} quaternion={marker.quaternion}>
+            <mesh position={[0, marker.stemLength * 0.5, 0]}>
+              <cylinderGeometry args={[marker.stemRadius, marker.stemRadius, marker.stemLength, 8]} />
+              <meshStandardMaterial
+                color={marker.isTarget ? "#9f7e22" : "#2b3a4a"}
+                metalness={0.1}
+                roughness={0.72}
+              />
+            </mesh>
+            <mesh position={[0, marker.stemLength, 0]}>
+              <sphereGeometry args={[marker.headRadius, 14, 14]} />
+              <meshStandardMaterial
+                color={marker.color}
+                emissive={marker.isTarget ? "#7a5a00" : "#203347"}
+                emissiveIntensity={marker.isTarget ? 0.45 : 0.12}
+                metalness={0.2}
+                roughness={0.45}
+              />
+            </mesh>
+          </group>
+        ))}
+        {flashLabelAnchor && flashLabel ? (
+          <GuessPlaceLabel
+            key={flashLabelToken ?? 0}
+            position={flashLabelAnchor}
+            label={flashLabel}
+            byName={flashByName}
+            durationMs={flashLabelDurationMs}
+            untilRoundEnd={flashLabelUntilRoundEnd}
+          />
+        ) : null}
       </group>
       <GlobeAnimator
         controlsRef={controlsRef}
@@ -128,6 +262,37 @@ const GlobeAnimator: FC<{
     }
   });
   return null;
+};
+
+const GuessPlaceLabel: FC<{
+  position: [number, number, number];
+  label: string;
+  byName?: string;
+  durationMs?: number;
+  untilRoundEnd?: boolean;
+}> = ({ position, label, byName, durationMs, untilRoundEnd }) => {
+  const style = {
+    "--guess-duration": `${Math.max(600, durationMs ?? 6000)}ms`,
+  } as CSSProperties;
+
+  return (
+    <Html
+      position={position}
+      center
+      transform
+      distanceFactor={8}
+      occlude
+      style={{ pointerEvents: "none" }}
+    >
+      <div
+        className={untilRoundEnd ? "map-guess-label map-guess-label--persistent" : "map-guess-label"}
+        style={style}
+      >
+        <strong>{label}</strong>
+        {byName ? <span>{byName}</span> : null}
+      </div>
+    </Html>
+  );
 };
 
 const ControlsTuner: FC<{ controlsRef: RefObject<OrbitControlsImpl | null> }> = ({ controlsRef }) => {
@@ -302,4 +467,26 @@ function normalizeRing(ring: number[][]): number[][] {
     normalized.push([nextLng, lat]);
   }
   return normalized;
+}
+
+function buildCapitalMarkers(
+  points: CountryPoint[],
+  highlightedCountryId?: string
+): CapitalMarker[] {
+  const up = new THREE.Vector3(0, 1, 0);
+  return points.map((point) => {
+    const isTarget = highlightedCountryId === point.id;
+    const base = latLngToVector3(point.coordinates.lat, point.coordinates.lng, 1.004);
+    const normal = base.clone().normalize();
+    const quaternion = new THREE.Quaternion().setFromUnitVectors(up, normal);
+    return {
+      position: [base.x, base.y, base.z],
+      quaternion: [quaternion.x, quaternion.y, quaternion.z, quaternion.w],
+      color: isTarget ? "#ffd700" : "#cfe0ef",
+      headRadius: isTarget ? 0.012 : 0.0068,
+      stemLength: isTarget ? 0.036 : 0.024,
+      stemRadius: isTarget ? 0.0018 : 0.0012,
+      isTarget,
+    };
+  });
 }
