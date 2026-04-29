@@ -5,6 +5,7 @@ import type {
   RoomCreatePayload,
   RoomJoinPayload,
   RoomConfigPayload,
+  GameStartPayload,
   GameAnswerPayload,
   RoomKickPayload,
   RoomErrorPayload,
@@ -137,9 +138,9 @@ export function registerHandlers(
   socket.on("room:join",         (p) => handleRoomJoin(socket, io, roomManager, p));
   socket.on("room:config",       (p) => handleRoomConfig(socket, io, roomManager, p));
   socket.on("room:kick",         (p) => handleRoomKick(socket, io, roomManager, p));
-  socket.on("game:start",        ()  => handleGameStart(socket, io, roomManager, gameEngine, countryLoader));
+  socket.on("game:start",        (p) => handleGameStart(socket, io, roomManager, gameEngine, countryLoader, p));
   socket.on("game:answer",       (p) => handleGameAnswer(socket, io, roomManager, gameEngine, countryLoader, p));
-  socket.on("game:next-round",   ()  => handleGameNextRound(socket, io, roomManager, gameEngine));
+  socket.on("game:next-round",   ()  => handleGameNextRound(socket, io, roomManager, gameEngine, countryLoader));
   socket.on("game:reveal-answer",()  => handleGameRevealAnswer(socket, io, roomManager, gameEngine, countryLoader));
   socket.on("disconnect",        ()  => handleDisconnect(socket, io, roomManager));
 }
@@ -317,7 +318,8 @@ export function handleGameStart(
   io: TypedServer,
   roomManager: RoomManager,
   gameEngine: GameEngine,
-  countryLoader: CountryLoader
+  countryLoader: CountryLoader,
+  payload?: GameStartPayload
 ): void {
   try {
     const code = getRoomCode(socket);
@@ -333,6 +335,9 @@ export function handleGameStart(
     }
     if (room.state !== "lobby") {
       throw new Error("GAME_IN_PROGRESS");
+    }
+    if (payload?.config) {
+      roomManager.setConfig(code, payload.config);
     }
 
     const connectedPlayers = Array.from(room.players.values()).filter(
@@ -378,7 +383,8 @@ export function handleGameNextRound(
   socket: TypedSocket,
   io: TypedServer,
   roomManager: RoomManager,
-  gameEngine: GameEngine
+  gameEngine: GameEngine,
+  countryLoader: CountryLoader
 ): void {
   try {
     const code = getRoomCode(socket);
@@ -414,6 +420,8 @@ export function handleGameNextRound(
         },
         timePerRound: room.config.timePerRound,
       });
+      const countries = countryLoader.getCountriesForLocale(room.config.locale);
+      startRoomTimer(room as RoomWithRuntime, io, roomManager, gameEngine, countries);
       return;
     }
 

@@ -52,7 +52,14 @@ type GameAction =
   | { type: "PLAYERS_UPDATED"; players: Player[] }
   | { type: "CONFIG_UPDATED"; config: GameConfig }
   | { type: "ROUND_START"; round: Omit<Round, "answers">; timePerRound: number }
-  | { type: "ANSWER_RESULT"; isCorrect: boolean; flashCountryId?: string; points: number; totalScore: number }
+  | {
+      type: "ANSWER_RESULT";
+      playerId: string;
+      isCorrect: boolean;
+      flashCountryId?: string;
+      points: number;
+      totalScore: number;
+    }
   | { type: "ROUND_END"; result: RoundResult }
   | { type: "TIMER_TICK"; remaining: number }
   | { type: "GAME_END"; result: GameResult }
@@ -132,10 +139,14 @@ function reducer(state: GameState, action: GameAction): GameState {
     case "ANSWER_RESULT":
       return {
         ...state,
+        players: state.players.map((player) =>
+          player.id === action.playerId ? { ...player, score: action.totalScore } : player
+        ),
         flashCountryId: action.flashCountryId ?? null,
         answerFeedback: action.isCorrect ? "correct" : "incorrect",
         lastPointsEarned: action.points,
-        myScore: action.totalScore || state.myScore,
+        myScore:
+          state.myPlayerId === action.playerId ? action.totalScore || state.myScore : state.myScore,
       };
     case "ROUND_END":
       return {
@@ -259,6 +270,7 @@ export function useGame(
     const handleAnswerResult: ServerToClientEvents["game:answer-result"] = (payload) => {
       dispatch({
         type: "ANSWER_RESULT",
+        playerId: payload.playerId,
         isCorrect: payload.isCorrect,
         flashCountryId: payload.flashCountryId,
         points: payload.points,
@@ -325,7 +337,10 @@ export function useGame(
     socket?.emit("room:config", config);
   }, [socket, state.config]);
 
-  const startGame = useCallback(() => socket?.emit("game:start"), [socket]);
+  const startGame = useCallback(
+    () => socket?.emit("game:start", { config: state.config ?? DEFAULT_GAME_CONFIG }),
+    [socket, state.config]
+  );
 
   const submitAnswer = useCallback((text: string) => {
     if (!state.currentRound) return;

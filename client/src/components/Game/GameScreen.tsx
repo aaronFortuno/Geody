@@ -66,15 +66,6 @@ export const GameScreen: FC<GameScreenProps> = ({
             flashCountryId={state.flashCountryId ?? undefined}
             autoRotate={config.autoRotateGlobe}
           />
-          {state.phase === "round-results" && state.roundResult ? (
-            <RoundResults
-              result={state.roundResult}
-              players={state.players}
-              myPlayerId={state.myPlayerId ?? undefined}
-              isHost={state.isHost}
-              onNext={onNextRound}
-            />
-          ) : null}
         </div>
         {!state.isHost && state.phase === "playing" ? (
           <AnswerInput
@@ -92,6 +83,15 @@ export const GameScreen: FC<GameScreenProps> = ({
           <Button variant="secondary" onClick={onRevealAnswer}>
             Mostrar Resposta
           </Button>
+        ) : null}
+        {state.phase === "round-results" && state.roundResult ? (
+          <RoundResults
+            result={state.roundResult}
+            players={state.players}
+            myPlayerId={state.myPlayerId ?? undefined}
+            isHost={state.isHost}
+            onNext={onNextRound}
+          />
         ) : null}
       </aside>
     </main>

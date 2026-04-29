@@ -141,6 +141,10 @@ export interface RoomKickPayload {
   playerId: string;
 }
 
+export interface GameStartPayload {
+  config?: Partial<GameConfig>;
+}
+
 // ─── Payloads Socket.IO: Servidor → Client ───────────────────────────────────
 
 export interface RoomCreatedPayload {
@@ -196,7 +200,7 @@ export interface ClientToServerEvents {
   "room:join": (payload: RoomJoinPayload) => void;
   "room:config": (payload: RoomConfigPayload) => void;
   "room:kick": (payload: RoomKickPayload) => void;
-  "game:start": () => void;
+  "game:start": (payload?: GameStartPayload) => void;
   "game:answer": (payload: GameAnswerPayload) => void;
   "game:next-round": () => void;
   "game:reveal-answer": () => void;

@@ -185,6 +185,7 @@ a {
     linear-gradient(135deg, var(--color-ocean), #124d64);
   opacity: 0.3;
   animation: slow-spin 24s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes slow-spin {
@@ -212,10 +213,16 @@ a {
 .host-lobby {
   min-height: 100%;
   display: grid;
-  grid-template-columns: minmax(260px, 0.8fr) minmax(300px, 1fr) minmax(320px, 1.2fr);
+  grid-template-columns: minmax(320px, 0.9fr) minmax(460px, 1.3fr);
   gap: 18px;
   padding: 24px;
   background: var(--color-bg);
+}
+
+.host-lobby__left {
+  display: grid;
+  gap: 18px;
+  align-content: start;
 }
 
 .room-code-panel h1 {
@@ -252,6 +259,12 @@ a {
   align-content: start;
 }
 
+.config-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .checkbox-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -263,6 +276,18 @@ a {
 .checkbox-grid legend {
   margin-bottom: 8px;
   font-weight: 700;
+  grid-column: 1 / -1;
+}
+
+.checkbox-grid > .ui-button {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+.continent-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .checkbox-grid label, .check-row {
@@ -398,11 +423,10 @@ a {
 }
 
 .round-results {
-  position: absolute;
-  inset: auto 24px 24px 24px;
+  position: static;
   display: grid;
   gap: 12px;
-  padding: 20px;
+  padding: 18px;
   border-radius: 8px;
   background: rgba(15, 25, 35, 0.94);
   color: white;
@@ -487,6 +511,10 @@ a {
   .host-lobby, .game-screen {
     grid-template-columns: 1fr;
     overflow: auto;
+  }
+
+  .config-grid {
+    grid-template-columns: 1fr;
   }
 
   html, body, #root {

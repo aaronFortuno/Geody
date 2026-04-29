@@ -1,4 +1,4 @@
-import type { CountryData, GameConfig, Round, Continent } from "@geody/shared";
+import type { CountryData, GameConfig, Round } from "@geody/shared";
 
 type RoundStub = Omit<Round, "startedAt" | "endedAt" | "answers">;
 
@@ -20,13 +20,16 @@ export class RoundGenerator {
    * @throws          Error si no hi ha prou paisos per als continents seleccionats
    */
   generateRounds(config: GameConfig, countries: CountryData[]): RoundStub[] {
+    if (config.continents.length === 0) {
+      throw new Error("No continents selected");
+    }
     const filtered = countries.filter((country) =>
       config.continents.includes(country.continent)
     );
     if (filtered.length < config.totalRounds) {
       throw new Error("Not enough countries");
     }
-    const selected = this.selectCountries(config.continents, config.totalRounds, countries);
+    const selected = this.selectCountries(config.totalRounds, filtered);
     return selected.map((country, index) => {
       const type =
         config.mode === "countries"
@@ -57,15 +60,13 @@ export class RoundGenerator {
    * @throws Error si filtered.length < count
    */
   private selectCountries(
-    continents: Continent[],
     count: number,
-    countries: CountryData[]
+    filteredCountries: CountryData[]
   ): CountryData[] {
-    const filtered = countries.filter((country) => continents.includes(country.continent));
-    if (filtered.length < count) {
+    if (filteredCountries.length < count) {
       throw new Error("Not enough countries");
     }
-    const shuffled = [...filtered];
+    const shuffled = [...filteredCountries];
     for (let i = shuffled.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = shuffled[i];
