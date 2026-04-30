@@ -32,7 +32,7 @@ jobs:
         run: npm run build --workspace=client
         env:
           # Replace with your real Render backend URL before pushing.
-          VITE_SERVER_URL: https://<your-render-service>.onrender.com
+          VITE_SERVER_URL: https://geody.onrender.com
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
