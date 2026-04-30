@@ -92,6 +92,109 @@ VITE_SERVER_URL=http://localhost:3001
 - `npm run build`: Build shared, client, and server
 - `npm test`: Run workspace tests
 
+## Deploy (Render + GitHub Pages)
+
+This project is split deployment:
+- Backend (`server`) on Render
+- Frontend (`client`) on GitHub Pages
+
+### 1. Push project to GitHub
+
+1. Create a GitHub repository (for example `geody`).
+2. Push this monorepo to `main`.
+3. Confirm your repository name:
+   - If repo is `geody`, current `client/vite.config.ts` already matches (`base: "/geody/"`).
+   - If repo has another name, change `base` to `"/<repo-name>/"`.
+
+### 2. Deploy server to Render
+
+1. In Render, click `New +` → `Web Service`.
+2. Connect your GitHub repo and select this repository.
+3. Use these settings:
+   - Runtime: `Node`
+   - Branch: `main`
+   - Root Directory: leave empty (repo root)
+   - Build Command:
+     ```bash
+     npm ci && npm run build --workspace=server
+     ```
+   - Start Command:
+     ```bash
+     npm run start --workspace=server
+     ```
+4. Add environment variables in Render:
+   - `NODE_ENV=production`
+   - `PORT=10000` (Render default for web services)
+   - `CLIENT_ORIGIN=https://<your-github-username>.github.io/<your-repo-name>`
+5. Deploy and wait for success.
+6. Open `https://<your-render-service>.onrender.com/health` and confirm JSON response with `"status":"ok"`.
+
+### 3. Deploy client to GitHub Pages
+
+Create a workflow at `.github/workflows/deploy-pages.yml`:
+
+```yaml
+name: Deploy Client to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build --workspace=client
+        env:
+          VITE_SERVER_URL: https://<your-render-service>.onrender.com
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: client/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+Then enable Pages:
+1. GitHub repo → `Settings` → `Pages`.
+2. Source: `GitHub Actions`.
+3. Push to `main` (or run workflow manually).
+4. Open `https://<your-github-username>.github.io/<your-repo-name>/`.
+
+### 4. Final checks
+
+1. Open the frontend URL.
+2. Create a room as host.
+3. Join from another tab/device.
+4. Confirm answers, scoring and round transitions work.
+
+If you see CORS errors in browser console:
+- Recheck Render `CLIENT_ORIGIN` is exactly your GitHub Pages URL (no trailing slash).
+- Rebuild/redeploy both server and client after env changes.
+
 ## Project Structure
 
 ```text
@@ -115,12 +218,6 @@ then `shared/` was not built yet. Run:
 npm run build --workspace=shared
 npm run dev:server
 ```
-
-## Roadmap Notes for Open Source
-
-- Add CI workflow (build + tests) for pull requests.
-- Add issue/PR templates and `CONTRIBUTING.md`.
-- Add deployment notes for GitHub Pages (client) + Render (server).
 
 ## License
 
