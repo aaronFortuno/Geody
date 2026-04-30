@@ -4,7 +4,7 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/geody/",
+  base: process.env["VITE_BASE_PATH"] ?? "./",
   resolve: {
     alias: {
       "@geody/shared": resolve(__dirname, "../shared/types.ts"),

@@ -14,17 +14,17 @@
   },
   "dependencies": {
     "@geody/shared": "*",
-    "cors": "^2.8.5",
-    "express": "^4.18.0",
-    "express-rate-limit": "^7.4.0",
-    "socket.io": "^4.7.0"
-  },
-  "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.0",
+    "express-rate-limit": "^7.4.0",
+    "socket.io": "^4.7.0",
+    "typescript": "^5.3.0"
+  },
+  "devDependencies": {
     "tsx": "^4.7.0",
-    "typescript": "^5.3.0",
     "vitest": "^1.2.0"
   }
 }

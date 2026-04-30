@@ -102,9 +102,8 @@ This project is split deployment:
 
 1. Create a GitHub repository (for example `geody`).
 2. Push this monorepo to `main`.
-3. Confirm your repository name:
-   - If repo is `geody`, current `client/vite.config.ts` already matches (`base: "/geody/"`).
-   - If repo has another name, change `base` to `"/<repo-name>/"`.
+3. No manual base-path edit is required:
+   - `client/vite.config.ts` uses relative base (`./`) by default, so GitHub Pages works regardless of repository name/casing.
 
 ### 2. Deploy server to Render
 
@@ -116,7 +115,7 @@ This project is split deployment:
    - Root Directory: leave empty (repo root)
    - Build Command:
      ```bash
-     npm ci && npm run build --workspace=server
+     npm ci --include=dev && npm run build --workspace=server
      ```
    - Start Command:
      ```bash
