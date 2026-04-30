@@ -9,7 +9,17 @@ import { CountryLoader } from "./data/CountryLoader.js";
 import { registerHandlers } from "./socket/handlers.js";
 
 const PORT = parseInt(process.env["PORT"] ?? "3001", 10);
-const CLIENT_ORIGIN = process.env["CLIENT_ORIGIN"] ?? "http://localhost:5173";
+const RAW_CLIENT_ORIGIN = process.env["CLIENT_ORIGIN"] ?? "http://localhost:5173";
+
+function normalizeOrigin(input: string): string {
+  try {
+    return new URL(input).origin;
+  } catch {
+    return input.replace(/\/+$/, "");
+  }
+}
+
+const CLIENT_ORIGIN = normalizeOrigin(RAW_CLIENT_ORIGIN);
 
 const app = express();
 const httpServer = createServer(app);

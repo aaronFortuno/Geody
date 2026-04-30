@@ -124,7 +124,8 @@ This project is split deployment:
 4. Add environment variables in Render:
    - `NODE_ENV=production`
    - `PORT=10000` (Render default for web services)
-   - `CLIENT_ORIGIN=https://<your-github-username>.github.io/<your-repo-name>`
+   - `CLIENT_ORIGIN=https://<your-github-username>.github.io`
+     (origin only, no repo path)
 5. Deploy and wait for success.
 6. Open `https://<your-render-service>.onrender.com/health` and confirm JSON response with `"status":"ok"`.
 
@@ -191,7 +192,8 @@ Then enable Pages:
 4. Confirm answers, scoring and round transitions work.
 
 If you see CORS errors in browser console:
-- Recheck Render `CLIENT_ORIGIN` is exactly your GitHub Pages URL (no trailing slash).
+- Recheck Render `CLIENT_ORIGIN` is exactly your site origin
+  (example: `https://aaronfortuno.github.io`, not `https://aaronfortuno.github.io/Geody`).
 - Rebuild/redeploy both server and client after env changes.
 
 ## Project Structure
