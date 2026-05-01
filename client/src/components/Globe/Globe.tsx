@@ -35,6 +35,12 @@ interface GlobeProps {
 }
 
 const BORDER_RADIUS = 1.003;
+type LodLevel = "110m" | "50m" | "10m";
+const LOD_FILES: Record<LodLevel, string> = {
+  "110m": "ne_110m_admin_0_countries.geojson",
+  "50m": "ne_50m_admin_0_countries.geojson",
+  "10m": "ne_10m_admin_0_countries.geojson",
+};
 
 interface CountryPoint {
   id: string;
@@ -63,7 +69,16 @@ export const Globe: FC<GlobeProps> = ({
   onCountryClick,
 }) => {
   void onCountryClick;
-  const [features, setFeatures] = useState<GeoJSONCountryFeature[]>([]);
+  const [featuresByLod, setFeaturesByLod] = useState<Record<LodLevel, GeoJSONCountryFeature[] | null>>({
+    "110m": null,
+    "50m": null,
+    "10m": null,
+  });
+  const [activeLod, setActiveLod] = useState<LodLevel>("110m");
+  const [previousLod, setPreviousLod] = useState<LodLevel | null>(null);
+  const [lodBlend, setLodBlend] = useState(1);
+  const activeLodRef = useRef<LodLevel>("110m");
+  const lodAnimRafRef = useRef<number | null>(null);
   const [capitalPoints, setCapitalPoints] = useState<CountryPoint[]>([]);
   const controlsRef = useRef<OrbitControlsImpl | null>(null);
   const isInteractingRef = useRef(false);
@@ -73,14 +88,37 @@ export const Globe: FC<GlobeProps> = ({
   useEffect(() => {
     let cancelled = false;
     const baseUrl = import.meta.env.BASE_URL ?? "/";
-    fetch(`${baseUrl}data/ne_110m_admin_0_countries.geojson`)
-      .then((response) => response.json() as Promise<{ features: GeoJSONCountryFeature[] }>)
-      .then((geojson) => {
-        if (!cancelled) setFeatures(geojson.features);
-      })
-      .catch((error) => console.error("Error carregant GeoJSON", error));
+    const loadLod = async (lod: LodLevel): Promise<GeoJSONCountryFeature[] | null> => {
+      try {
+        const response = await fetch(`${baseUrl}data/${LOD_FILES[lod]}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const geojson = (await response.json()) as { features: GeoJSONCountryFeature[] };
+        return geojson.features;
+      } catch (error) {
+        if (lod === "110m") {
+          console.error("Error carregant GeoJSON base 110m", error);
+        } else {
+          console.warn(`LOD ${lod} no disponible, es manté fallback`, error);
+        }
+        return null;
+      }
+    };
+
+    Promise.all([loadLod("110m"), loadLod("50m"), loadLod("10m")]).then(([m110, m50, m10]) => {
+      if (cancelled) return;
+      setFeaturesByLod({
+        "110m": m110,
+        "50m": m50,
+        "10m": m10,
+      });
+    });
+
     return () => {
       cancelled = true;
+      if (lodAnimRafRef.current !== null) {
+        cancelAnimationFrame(lodAnimRafRef.current);
+        lodAnimRafRef.current = null;
+      }
     };
   }, []);
 
@@ -121,7 +159,15 @@ export const Globe: FC<GlobeProps> = ({
     };
   }, []);
 
-  const countryCenters = useMemo(() => buildCountryCenters(features), [features]);
+  const activeFeatures = useMemo(
+    () => getFeaturesForLod(featuresByLod, activeLod),
+    [featuresByLod, activeLod]
+  );
+  const previousFeatures = useMemo(
+    () => (previousLod ? getFeaturesForLod(featuresByLod, previousLod) : null),
+    [featuresByLod, previousLod]
+  );
+  const countryCenters = useMemo(() => buildCountryCenters(activeFeatures), [activeFeatures]);
   const capitalPointMap = useMemo(
     () =>
       new Map(
@@ -134,10 +180,22 @@ export const Globe: FC<GlobeProps> = ({
   );
   const highlightedCountryId = roundType === "capital" ? undefined : targetCountryId;
   const mapTexture = useMemo(
-    () => createMapTexture(features, highlightedCountryId, flashCountryId),
-    [features, highlightedCountryId, flashCountryId]
+    () => createMapTexture(activeFeatures, activeLod, highlightedCountryId, flashCountryId),
+    [activeFeatures, activeLod, highlightedCountryId, flashCountryId]
   );
-  const borderLines = useMemo(() => buildBorderLines(features), [features]);
+  const previousMapTexture = useMemo(
+    () =>
+      previousFeatures
+        ? createMapTexture(
+            previousFeatures,
+            previousLod ?? activeLod,
+            highlightedCountryId,
+            flashCountryId
+          )
+        : null,
+    [previousFeatures, previousLod, activeLod, highlightedCountryId, flashCountryId]
+  );
+  const borderLines = useMemo(() => buildBorderLines(activeFeatures), [activeFeatures]);
   const capitalMarkers = useMemo(
     () => buildCapitalMarkers(capitalPoints, roundType === "capital" ? targetCountryId : undefined),
     [capitalPoints, roundType, targetCountryId]
@@ -175,6 +233,7 @@ export const Globe: FC<GlobeProps> = ({
     [capitalPointMap, countryCenters, flashLabels, roundType]
   );
   useEffect(() => () => mapTexture.dispose(), [mapTexture]);
+  useEffect(() => () => previousMapTexture?.dispose(), [previousMapTexture]);
 
   useEffect(() => {
     if (!targetCountryId) {
@@ -192,42 +251,78 @@ export const Globe: FC<GlobeProps> = ({
     shouldFocusRef.current = autoRotate;
   }, [autoRotate, countryCenters, targetCountryId]);
 
+  const triggerLodTransition = (nextLod: LodLevel) => {
+    const current = activeLodRef.current;
+    if (nextLod === current) return;
+    const nextFeatures = getFeaturesForLod(featuresByLod, nextLod);
+    if (nextFeatures.length === 0) return;
+
+    if (lodAnimRafRef.current !== null) {
+      cancelAnimationFrame(lodAnimRafRef.current);
+      lodAnimRafRef.current = null;
+    }
+
+    setPreviousLod(current);
+    setActiveLod(nextLod);
+    activeLodRef.current = nextLod;
+    setLodBlend(0);
+
+    const start = performance.now();
+    const durationMs = 220;
+    const tick = (now: number) => {
+      const t = Math.max(0, Math.min(1, (now - start) / durationMs));
+      setLodBlend(t);
+      if (t < 1) {
+        lodAnimRafRef.current = requestAnimationFrame(tick);
+      } else {
+        setPreviousLod(null);
+        lodAnimRafRef.current = null;
+      }
+    };
+    lodAnimRafRef.current = requestAnimationFrame(tick);
+  };
+
+  const handleDistanceChange = (distance: number) => {
+    const candidate = pickLodForDistance(distance, activeLodRef.current);
+    const available = resolveAvailableLod(candidate, featuresByLod);
+    if (available !== activeLodRef.current) {
+      triggerLodTransition(available);
+    }
+  };
+
   return (
     <Canvas camera={{ position: [0, 0, 2.5], fov: 45 }}>
       <ambientLight intensity={0.7} />
       <directionalLight position={[5, 5, 5]} intensity={0.8} />
       <group>
+        {previousMapTexture && previousLod ? (
+          <mesh>
+            <sphereGeometry args={[0.9995, 96, 96]} />
+            <meshPhongMaterial
+              map={previousMapTexture}
+              shininess={10}
+              transparent
+              depthWrite={false}
+              opacity={1 - lodBlend}
+            />
+          </mesh>
+        ) : null}
         <mesh>
           <sphereGeometry args={[1, 96, 96]} />
-          <meshPhongMaterial map={mapTexture} shininess={10} />
+          <meshPhongMaterial
+            map={mapTexture}
+            shininess={10}
+            transparent={previousLod !== null}
+            depthWrite={previousLod === null}
+            opacity={previousLod ? lodBlend : 1}
+          />
         </mesh>
         {borderLines.map((line, index) => (
           <primitive key={index} object={line} />
         ))}
-        {showCapitalMarkers
-          ? capitalMarkers.map((marker, index) => (
-          <group key={index} position={marker.position} quaternion={marker.quaternion}>
-            <mesh position={[0, marker.stemLength * 0.5, 0]}>
-              <cylinderGeometry args={[marker.stemRadius, marker.stemRadius, marker.stemLength, 8]} />
-              <meshStandardMaterial
-                color={marker.isTarget ? "#9f7e22" : "#2b3a4a"}
-                metalness={0.1}
-                roughness={0.72}
-              />
-            </mesh>
-            <mesh position={[0, marker.stemLength, 0]}>
-              <sphereGeometry args={[marker.headRadius, 14, 14]} />
-              <meshStandardMaterial
-                color={marker.color}
-                emissive={marker.isTarget ? "#7a5a00" : "#203347"}
-                emissiveIntensity={marker.isTarget ? 0.45 : 0.12}
-                metalness={0.2}
-                roughness={0.45}
-              />
-            </mesh>
-          </group>
-            ))
-          : null}
+        {showCapitalMarkers ? (
+          <CapitalMarkersLayer markers={capitalMarkers} controlsRef={controlsRef} />
+        ) : null}
         {anchoredLabels.map((entry) => (
           <GuessPlaceLabel
             key={entry.id}
@@ -248,7 +343,7 @@ export const Globe: FC<GlobeProps> = ({
         targetVectorRef={targetVectorRef}
         shouldFocusRef={shouldFocusRef}
       />
-      <ControlsTuner controlsRef={controlsRef} />
+      <ControlsTuner controlsRef={controlsRef} onDistanceChange={handleDistanceChange} />
       <OrbitControls
         ref={controlsRef}
         enablePan={false}
@@ -345,7 +440,16 @@ const GuessPlaceLabel: FC<{
   );
 };
 
-const ControlsTuner: FC<{ controlsRef: RefObject<OrbitControlsImpl | null> }> = ({ controlsRef }) => {
+const CapitalMarkersLayer: FC<{
+  markers: CapitalMarker[];
+  controlsRef: RefObject<OrbitControlsImpl | null>;
+}> = ({ markers, controlsRef }) => {
+  const visualRefs = useRef<Array<THREE.Group | null>>([]);
+
+  useEffect(() => {
+    visualRefs.current = visualRefs.current.slice(0, markers.length);
+  }, [markers.length]);
+
   useFrame(() => {
     const controls = controlsRef.current;
     if (!controls) return;
@@ -353,6 +457,61 @@ const ControlsTuner: FC<{ controlsRef: RefObject<OrbitControlsImpl | null> }> = 
     const zoomT =
       zoomRange > 0
         ? Math.max(0, Math.min(1, (controls.maxDistance - controls.getDistance()) / zoomRange))
+        : 0;
+    const markerScale = Math.max(0.4, 1 - zoomT * 0.55);
+    for (const ref of visualRefs.current) {
+      if (!ref) continue;
+      ref.scale.setScalar(markerScale);
+    }
+  });
+
+  return (
+    <group>
+      {markers.map((marker, index) => (
+        <group key={index} position={marker.position} quaternion={marker.quaternion}>
+          <group
+            ref={(value) => {
+              visualRefs.current[index] = value;
+            }}
+          >
+            <mesh position={[0, marker.stemLength * 0.5, 0]}>
+              <cylinderGeometry args={[marker.stemRadius, marker.stemRadius, marker.stemLength, 8]} />
+              <meshStandardMaterial
+                color={marker.isTarget ? "#9f7e22" : "#2b3a4a"}
+                metalness={0.1}
+                roughness={0.72}
+              />
+            </mesh>
+            <mesh position={[0, marker.stemLength, 0]}>
+              <sphereGeometry args={[marker.headRadius, 14, 14]} />
+              <meshStandardMaterial
+                color={marker.color}
+                emissive={marker.isTarget ? "#7a5a00" : "#203347"}
+                emissiveIntensity={marker.isTarget ? 0.45 : 0.12}
+                metalness={0.2}
+                roughness={0.45}
+              />
+            </mesh>
+          </group>
+        </group>
+      ))}
+    </group>
+  );
+};
+
+const ControlsTuner: FC<{
+  controlsRef: RefObject<OrbitControlsImpl | null>;
+  onDistanceChange?: (distance: number) => void;
+}> = ({ controlsRef, onDistanceChange }) => {
+  useFrame(() => {
+    const controls = controlsRef.current;
+    if (!controls) return;
+    const distance = controls.getDistance();
+    onDistanceChange?.(distance);
+    const zoomRange = controls.maxDistance - controls.minDistance;
+    const zoomT =
+      zoomRange > 0
+        ? Math.max(0, Math.min(1, (controls.maxDistance - distance) / zoomRange))
         : 0;
     controls.rotateSpeed = 0.75 - zoomT * 0.5;
     controls.zoomSpeed = 0.8 - zoomT * 0.3;
@@ -362,11 +521,12 @@ const ControlsTuner: FC<{ controlsRef: RefObject<OrbitControlsImpl | null> }> = 
 
 function createMapTexture(
   features: GeoJSONCountryFeature[],
+  lod: LodLevel,
   targetCountryId?: string,
   flashCountryId?: string
 ): THREE.CanvasTexture {
-  const width = 4096;
-  const height = 2048;
+  const width = getTextureWidthForLod(lod);
+  const height = Math.floor(width / 2);
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
@@ -395,7 +555,10 @@ function createMapTexture(
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.ClampToEdgeWrapping;
-  texture.anisotropy = 8;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.generateMipmaps = true;
+  texture.anisotropy = 16;
   texture.needsUpdate = true;
   return texture;
 }
@@ -539,4 +702,47 @@ function buildCapitalMarkers(
       isTarget,
     };
   });
+}
+
+function pickLodForDistance(distance: number, current: LodLevel): LodLevel {
+  if (current === "110m") {
+    return distance < 2.15 ? "50m" : "110m";
+  }
+  if (current === "50m") {
+    if (distance < 1.45) return "10m";
+    if (distance > 2.45) return "110m";
+    return "50m";
+  }
+  if (distance > 1.65) return "50m";
+  return "10m";
+}
+
+function resolveAvailableLod(
+  target: LodLevel,
+  featuresByLod: Record<LodLevel, GeoJSONCountryFeature[] | null>
+): LodLevel {
+  const has = (lod: LodLevel) => (featuresByLod[lod]?.length ?? 0) > 0;
+  if (has(target)) return target;
+  if (target === "10m") {
+    if (has("50m")) return "50m";
+    return "110m";
+  }
+  if (target === "50m") return "110m";
+  if (has("110m")) return "110m";
+  if (has("50m")) return "50m";
+  return "10m";
+}
+
+function getFeaturesForLod(
+  featuresByLod: Record<LodLevel, GeoJSONCountryFeature[] | null>,
+  target: LodLevel
+): GeoJSONCountryFeature[] {
+  const resolved = resolveAvailableLod(target, featuresByLod);
+  return featuresByLod[resolved] ?? [];
+}
+
+function getTextureWidthForLod(lod: LodLevel): number {
+  if (lod === "10m") return 8192;
+  if (lod === "50m") return 6144;
+  return 4096;
 }

@@ -18,6 +18,8 @@ export interface CountryData {
       country: string;
       capital: string;
       acceptedVariants?: string[];
+      acceptedCountryVariants?: string[];
+      acceptedCapitalVariants?: string[];
     };
   };
 }

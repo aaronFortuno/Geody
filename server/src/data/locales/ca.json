@@ -6,7 +6,12 @@
   "PRT": { "country": "Portugal",     "capital": "Lisboa",       "acceptedVariants": [] },
   "GBR": { "country": "Regne Unit",   "capital": "Londres",      "acceptedVariants": ["London"] },
   "POL": { "country": "Polònia",      "capital": "Varsòvia",     "acceptedVariants": ["Warsaw", "Warszawa"] },
-  "NLD": { "country": "Països Baixos","capital": "Amsterdam",    "acceptedVariants": ["Holanda"] },
+  "NLD": {
+    "country": "Països Baixos",
+    "capital": "Amsterdam",
+    "acceptedVariants": ["Holanda"],
+    "acceptedCountryVariants": ["Holanda"]
+  },
   "BEL": { "country": "Bèlgica",      "capital": "Brussel·les",  "acceptedVariants": ["Brussels", "Bruxelles"] },
   "CHE": { "country": "Suïssa",       "capital": "Berna",        "acceptedVariants": ["Bern"] },
   "AUT": { "country": "Àustria",      "capital": "Viena",        "acceptedVariants": ["Wien", "Vienna"] },
@@ -51,9 +56,19 @@
   "GHA": { "country": "Ghana",        "capital": "Accra",        "acceptedVariants": [] },
   "CMR": { "country": "Camerun",      "capital": "Iaundé",       "acceptedVariants": ["Yaounde", "Yaoundé"] },
   "SEN": { "country": "Senegal",      "capital": "Dakar",        "acceptedVariants": [] },
-  "USA": { "country": "Estats Units", "capital": "Washington D.C.", "acceptedVariants": ["Washington", "EUA", "USA"] },
+  "USA": {
+    "country": "Estats Units",
+    "capital": "Washington D.C.",
+    "acceptedVariants": ["Washington", "EUA", "USA"],
+    "acceptedCountryVariants": ["EUA", "USA"]
+  },
   "CAN": { "country": "Canadà",       "capital": "Ottawa",       "acceptedVariants": [] },
-  "MEX": { "country": "Mèxic",        "capital": "Ciutat de Mèxic", "acceptedVariants": ["Mexico", "Mexico City"] },
+  "MEX": {
+    "country": "Mèxic",
+    "capital": "Ciutat de Mèxic",
+    "acceptedVariants": ["Mexico", "Mexico City"],
+    "acceptedCountryVariants": ["Mexico"]
+  },
   "CUB": { "country": "Cuba",         "capital": "L'Havana",     "acceptedVariants": ["Havana"] },
   "GTM": { "country": "Guatemala",    "capital": "Ciutat de Guatemala", "acceptedVariants": ["Guatemala City"] },
   "CRI": { "country": "Costa Rica",   "capital": "San José",     "acceptedVariants": [] },

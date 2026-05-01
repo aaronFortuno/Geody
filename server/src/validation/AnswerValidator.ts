@@ -44,10 +44,12 @@ export class AnswerValidator {
       const field = roundType === "country" ? localeData.country : localeData.capital;
       return this.normalize(field) === normalizedCorrect;
     });
-    const variants =
-      targetCountry?.names[locale]?.acceptedVariants?.map((variant) =>
-        this.normalize(variant)
-      ) ?? [];
+    const localeData = targetCountry?.names[locale];
+    const variantSource =
+      roundType === "country"
+        ? localeData?.acceptedCountryVariants ?? []
+        : localeData?.acceptedCapitalVariants ?? localeData?.acceptedVariants ?? [];
+    const variants = variantSource.map((variant) => this.normalize(variant));
     const isCorrect =
       normalizedAnswer === normalizedCorrect || variants.includes(normalizedAnswer);
     const isSpellingPerfect = isCorrect && answer.trim() === correctAnswer;
@@ -107,7 +109,10 @@ export class AnswerValidator {
       if (this.normalize(field) === normalizedAnswer) {
         return country.id;
       }
-      const variants = localeData.acceptedVariants ?? [];
+      const variants =
+        roundType === "country"
+          ? localeData.acceptedCountryVariants ?? []
+          : localeData.acceptedCapitalVariants ?? localeData.acceptedVariants ?? [];
       if (variants.some((variant) => this.normalize(variant) === normalizedAnswer)) {
         return country.id;
       }

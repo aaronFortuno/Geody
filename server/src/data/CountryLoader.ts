@@ -7,6 +7,8 @@ export interface LocaleEntry {
   country: string;
   capital: string;
   acceptedVariants?: string[];
+  acceptedCountryVariants?: string[];
+  acceptedCapitalVariants?: string[];
 }
 
 export type LocaleData = Record<string, LocaleEntry>;
