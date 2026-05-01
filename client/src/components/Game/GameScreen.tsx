@@ -14,6 +14,7 @@ interface GameScreenProps {
   onSubmitAnswer: (text: string) => void;
   onNextRound: () => void;
   onRevealAnswer: () => void;
+  onEndGame: () => void;
 }
 
 /**
@@ -43,13 +44,18 @@ export const GameScreen: FC<GameScreenProps> = ({
   onSubmitAnswer,
   onNextRound,
   onRevealAnswer,
+  onEndGame,
 }) => {
   const round = state.currentRound;
   const totalRounds = config.totalRounds;
-  const flashByName =
-    state.flashByPlayerId
-      ? state.players.find((player) => player.id === state.flashByPlayerId)?.name
-      : null;
+  const flashLabels = state.flashLabels.map((entry) => ({
+    id: entry.id,
+    countryId: entry.countryId,
+    label: entry.label,
+    byName: state.players.find((player) => player.id === entry.byPlayerId)?.name,
+    durationMs: entry.durationMs,
+    untilRoundEnd: entry.untilRoundEnd,
+  }));
 
   return (
     <main className="game-screen">
@@ -83,11 +89,7 @@ export const GameScreen: FC<GameScreenProps> = ({
             flashCountryId={state.flashCountryId ?? undefined}
             roundType={round?.type}
             autoRotate={config.autoRotateGlobe}
-            flashLabel={state.flashLabel ?? undefined}
-            flashByName={flashByName ?? undefined}
-            flashLabelToken={state.flashLabelToken}
-            flashLabelDurationMs={state.flashLabelDurationMs}
-            flashLabelUntilRoundEnd={state.flashLabelUntilRoundEnd}
+            flashLabels={flashLabels}
           />
         </div>
       </section>
@@ -95,8 +97,18 @@ export const GameScreen: FC<GameScreenProps> = ({
       <aside className="game-screen__side">
         <Scoreboard players={state.players} myPlayerId={state.myPlayerId ?? undefined} />
         {state.isHost && state.phase === "playing" ? (
-          <Button variant="secondary" onClick={onRevealAnswer}>
-            Mostrar Resposta
+          <>
+            <Button variant="secondary" onClick={onRevealAnswer}>
+              Mostrar Resposta
+            </Button>
+            <Button variant="danger" onClick={onEndGame}>
+              Finalitzar Partida
+            </Button>
+          </>
+        ) : null}
+        {state.isHost && state.phase === "round-results" ? (
+          <Button variant="danger" onClick={onEndGame}>
+            Finalitzar Partida
           </Button>
         ) : null}
         {state.phase === "round-results" && state.roundResult ? (

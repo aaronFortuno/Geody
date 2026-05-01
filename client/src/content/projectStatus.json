@@ -1,0 +1,19 @@
+{
+  "version": "v0.1",
+  "releasedAt": "2026-05-01",
+  "title": "Geody v0.1",
+  "status": "Primera versió pública jugable amb lobby en temps real, rondes de països/capitals, globus 3D interactiu i desplegament actiu a Render + GitHub Pages.",
+  "highlights": [
+    "Sala multijugador amb codi curt i reconnexió de jugadors.",
+    "Modes de joc per països, capitals o mixt.",
+    "Renderitzat estable del globus amb fronteres i capitals.",
+    "Puntuació en directe i flux complet de rondes/resultats."
+  ],
+  "nextFocus": [
+    "Iteracions de UX/UI a lobby i pantalla de joc.",
+    "Millora de feedback visual en respostes i rondes.",
+    "Enduriment de deploy i observabilitat."
+  ],
+  "license": "MIT",
+  "changelogPath": "CHANGELOG.md"
+}

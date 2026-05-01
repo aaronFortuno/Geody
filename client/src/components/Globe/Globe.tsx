@@ -20,11 +20,17 @@ interface GlobeProps {
   flashCountryId?: string;
   roundType?: "country" | "capital";
   autoRotate: boolean;
-  flashLabel?: string;
-  flashByName?: string;
-  flashLabelToken?: number;
-  flashLabelDurationMs?: number;
-  flashLabelUntilRoundEnd?: boolean;
+  idleSpin?: boolean;
+  idleSpinSecondsPerTurn?: number;
+  showCapitalMarkers?: boolean;
+  flashLabels?: Array<{
+    id: number;
+    countryId: string;
+    label: string;
+    byName?: string;
+    durationMs?: number;
+    untilRoundEnd?: boolean;
+  }>;
   onCountryClick?: (countryId: string) => void;
 }
 
@@ -50,11 +56,10 @@ export const Globe: FC<GlobeProps> = ({
   flashCountryId,
   roundType,
   autoRotate,
-  flashLabel,
-  flashByName,
-  flashLabelToken,
-  flashLabelDurationMs,
-  flashLabelUntilRoundEnd,
+  idleSpin = false,
+  idleSpinSecondsPerTurn = 150,
+  showCapitalMarkers = true,
+  flashLabels = [],
   onCountryClick,
 }) => {
   void onCountryClick;
@@ -137,14 +142,38 @@ export const Globe: FC<GlobeProps> = ({
     () => buildCapitalMarkers(capitalPoints, roundType === "capital" ? targetCountryId : undefined),
     [capitalPoints, roundType, targetCountryId]
   );
-  const flashLabelAnchor = useMemo(() => {
-    if (!flashCountryId || !flashLabel) return null;
-    const source = roundType === "capital" ? capitalPointMap : countryCenters;
-    const anchor = source.get(flashCountryId);
-    if (!anchor) return null;
-    const point = latLngToVector3(anchor.lat, anchor.lng, 1.05);
-    return [point.x, point.y, point.z] as [number, number, number];
-  }, [capitalPointMap, countryCenters, flashCountryId, flashLabel, roundType]);
+  const anchoredLabels = useMemo(
+    () =>
+      flashLabels
+        .map((entry) => {
+          const preferred =
+            roundType === "capital" ? capitalPointMap.get(entry.countryId) : countryCenters.get(entry.countryId);
+          const fallback =
+            roundType === "capital" ? countryCenters.get(entry.countryId) : capitalPointMap.get(entry.countryId);
+          const anchor = preferred ?? fallback;
+          if (!anchor) return null;
+          const point = latLngToVector3(anchor.lat, anchor.lng, 1.01);
+          const normal = point.clone().normalize();
+          const fallbackAxis = Math.abs(normal.y) > 0.92
+            ? new THREE.Vector3(1, 0, 0)
+            : new THREE.Vector3(0, 1, 0);
+          const tangentA = new THREE.Vector3().crossVectors(normal, fallbackAxis).normalize();
+          const tangentB = new THREE.Vector3().crossVectors(normal, tangentA).normalize();
+          const angle = ((entry.id * 137.5) % 360) * (Math.PI / 180);
+          const spread = 0.012;
+          const offset = tangentA
+            .clone()
+            .multiplyScalar(Math.cos(angle) * spread)
+            .add(tangentB.clone().multiplyScalar(Math.sin(angle) * spread));
+          const adjusted = point.clone().add(offset).normalize().multiplyScalar(1.015);
+          return {
+            ...entry,
+            position: [adjusted.x, adjusted.y, adjusted.z] as [number, number, number],
+          };
+        })
+        .filter((entry): entry is NonNullable<typeof entry> => entry !== null),
+    [capitalPointMap, countryCenters, flashLabels, roundType]
+  );
   useEffect(() => () => mapTexture.dispose(), [mapTexture]);
 
   useEffect(() => {
@@ -175,7 +204,8 @@ export const Globe: FC<GlobeProps> = ({
         {borderLines.map((line, index) => (
           <primitive key={index} object={line} />
         ))}
-        {capitalMarkers.map((marker, index) => (
+        {showCapitalMarkers
+          ? capitalMarkers.map((marker, index) => (
           <group key={index} position={marker.position} quaternion={marker.quaternion}>
             <mesh position={[0, marker.stemLength * 0.5, 0]}>
               <cylinderGeometry args={[marker.stemRadius, marker.stemRadius, marker.stemLength, 8]} />
@@ -196,21 +226,24 @@ export const Globe: FC<GlobeProps> = ({
               />
             </mesh>
           </group>
-        ))}
-        {flashLabelAnchor && flashLabel ? (
+            ))
+          : null}
+        {anchoredLabels.map((entry) => (
           <GuessPlaceLabel
-            key={flashLabelToken ?? 0}
-            position={flashLabelAnchor}
-            label={flashLabel}
-            byName={flashByName}
-            durationMs={flashLabelDurationMs}
-            untilRoundEnd={flashLabelUntilRoundEnd}
+            key={entry.id}
+            position={entry.position}
+            label={entry.label}
+            byName={entry.byName}
+            durationMs={entry.durationMs}
+            untilRoundEnd={entry.untilRoundEnd}
           />
-        ) : null}
+        ))}
       </group>
       <GlobeAnimator
         controlsRef={controlsRef}
         autoRotate={autoRotate}
+        idleSpin={idleSpin}
+        idleSpinSecondsPerTurn={idleSpinSecondsPerTurn}
         isInteractingRef={isInteractingRef}
         targetVectorRef={targetVectorRef}
         shouldFocusRef={shouldFocusRef}
@@ -240,10 +273,21 @@ export const Globe: FC<GlobeProps> = ({
 const GlobeAnimator: FC<{
   controlsRef: RefObject<OrbitControlsImpl | null>;
   autoRotate: boolean;
+  idleSpin: boolean;
+  idleSpinSecondsPerTurn: number;
   isInteractingRef: MutableRefObject<boolean>;
   targetVectorRef: MutableRefObject<THREE.Vector3 | null>;
   shouldFocusRef: MutableRefObject<boolean>;
-}> = ({ controlsRef, autoRotate, isInteractingRef, targetVectorRef, shouldFocusRef }) => {
+}> = ({
+  controlsRef,
+  autoRotate,
+  idleSpin,
+  idleSpinSecondsPerTurn,
+  isInteractingRef,
+  targetVectorRef,
+  shouldFocusRef,
+}) => {
+  const spinAxis = useMemo(() => new THREE.Vector3(0, 1, 0), []);
   useFrame((state, delta) => {
     const controls = controlsRef.current;
     if (!controls) return;
@@ -259,6 +303,14 @@ const GlobeAnimator: FC<{
         state.camera.position.copy(desiredPos);
         shouldFocusRef.current = false;
       }
+    }
+
+    if (idleSpin && !isInteractingRef.current && !shouldFocusRef.current) {
+      const turnSeconds = Math.max(20, idleSpinSecondsPerTurn);
+      const angle = (Math.PI * 2 * delta) / turnSeconds;
+      state.camera.position.applyAxisAngle(spinAxis, angle);
+      controls.target.set(0, 0, 0);
+      controls.update();
     }
   });
   return null;
@@ -279,9 +331,7 @@ const GuessPlaceLabel: FC<{
     <Html
       position={position}
       center
-      transform
-      distanceFactor={8}
-      occlude
+      occlude={false}
       style={{ pointerEvents: "none" }}
     >
       <div

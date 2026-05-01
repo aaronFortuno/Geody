@@ -148,7 +148,6 @@ select.ui-input option {
 .home-screen, .lobby, .final-results {
   min-height: 100%;
   display: grid;
-  place-items: center;
   padding: 24px;
   background:
     radial-gradient(circle at 50% 30%, rgba(26, 107, 138, 0.5), transparent 32rem),
@@ -156,11 +155,31 @@ select.ui-input option {
   color: white;
 }
 
+.home-screen {
+  position: relative;
+  padding: 0;
+  place-items: center;
+  overflow: hidden;
+}
+
+.lobby, .final-results {
+  place-items: center;
+}
+
 .home-screen__content {
   display: grid;
   gap: 22px;
   justify-items: center;
   text-align: center;
+  align-content: center;
+  width: min(640px, calc(100% - 32px));
+  z-index: 2;
+  padding: 24px;
+  border-radius: 12px;
+  background: rgba(15, 25, 35, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.34);
 }
 
 .home-screen h1 {
@@ -180,21 +199,95 @@ select.ui-input option {
   justify-content: center;
 }
 
-.home-screen__globe {
-  position: fixed;
-  width: min(72vw, 720px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.22), transparent 20%),
-    linear-gradient(135deg, var(--color-ocean), #124d64);
-  opacity: 0.3;
-  animation: slow-spin 24s linear infinite;
-  pointer-events: none;
+.home-screen__globe-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
-@keyframes slow-spin {
-  to { transform: rotate(360deg); }
+.home-screen__globe {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #07111a;
+}
+
+.home-screen__footer {
+  position: absolute;
+  bottom: 10px;
+  right: 24px;
+  z-index: 4;
+}
+
+.home-screen__version {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 25, 35, 0.74);
+  color: rgba(255, 255, 255, 0.86);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.home-screen__version:hover {
+  background: rgba(15, 25, 35, 0.92);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  background: rgba(3, 8, 14, 0.64);
+  padding: 20px;
+}
+
+.modal-card {
+  width: min(560px, 100%);
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 10px;
+  background: rgba(28, 43, 58, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: white;
+}
+
+.modal-card h3 {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.modal-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-card__meta {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.86rem;
+}
+
+.modal-card__list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.modal-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.modal-card__links a {
+  color: var(--color-highlight);
+  font-weight: 700;
 }
 
 .panel {
@@ -374,9 +467,10 @@ select.ui-input option {
   --guess-duration: 6000ms;
   display: grid;
   justify-items: center;
-  gap: 4px;
-  min-width: 86px;
-  padding: 8px 12px;
+  gap: 2px;
+  min-width: 68px;
+  max-width: 140px;
+  padding: 5px 8px;
   border-radius: 999px;
   background: rgba(7, 18, 28, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -388,14 +482,16 @@ select.ui-input option {
 }
 
 .map-guess-label strong {
-  font-size: 0.9rem;
+  font-size: 0.72rem;
   line-height: 1;
   font-weight: 900;
+  text-align: center;
 }
 
 .map-guess-label span {
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   color: rgba(238, 246, 255, 0.8);
+  text-align: center;
 }
 
 .map-guess-label--persistent {
@@ -597,6 +693,11 @@ select.ui-input option {
     overflow: hidden;
   }
 
+  .home-screen__content {
+    width: min(640px, calc(100% - 24px));
+    padding: 20px;
+  }
+
   .config-grid {
     grid-template-columns: 1fr;
   }
@@ -621,8 +722,18 @@ select.ui-input option {
 }
 
 @media (max-width: 720px) {
-  .home-screen, .lobby, .final-results, .host-lobby, .game-screen {
+  .lobby, .final-results, .host-lobby, .game-screen {
     padding: 14px;
+  }
+
+  .home-screen__content {
+    width: min(640px, calc(100% - 16px));
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .home-screen__footer {
+    right: 14px;
   }
 
   .answer-input {

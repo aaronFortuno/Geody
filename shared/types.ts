@@ -191,6 +191,11 @@ export interface GameEndPayload {
   result: GameResult;
 }
 
+export interface GameReturnedLobbyPayload {
+  players: Player[];
+  config: GameConfig;
+}
+
 export interface GameTimerTickPayload {
   remaining: number;
 }
@@ -211,6 +216,7 @@ export interface ClientToServerEvents {
   "game:answer": (payload: GameAnswerPayload) => void;
   "game:next-round": () => void;
   "game:reveal-answer": () => void;
+  "game:return-lobby": () => void;
 }
 
 export interface ServerToClientEvents {
@@ -222,5 +228,6 @@ export interface ServerToClientEvents {
   "game:answer-result": (payload: GameAnswerResultPayload) => void;
   "game:round-end": (payload: GameRoundEndPayload) => void;
   "game:end": (payload: GameEndPayload) => void;
+  "game:returned-lobby": (payload: GameReturnedLobbyPayload) => void;
   "game:timer-tick": (payload: GameTimerTickPayload) => void;
 }

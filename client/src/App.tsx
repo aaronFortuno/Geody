@@ -40,6 +40,7 @@ export default function App() {
           onSubmitAnswer={actions.submitAnswer}
           onNextRound={actions.nextRound}
           onRevealAnswer={actions.revealAnswer}
+          onEndGame={actions.returnToLobby}
         />
       </>
     );

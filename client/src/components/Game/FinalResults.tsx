@@ -46,9 +46,13 @@ export const FinalResults: FC<FinalResultsProps> = ({
           ))}
         </ol>
       </section>
-      <Button variant={isHost ? "primary" : "secondary"} onClick={onReturnToLobby}>
-        Tornar al Lobby
-      </Button>
+      {isHost ? (
+        <Button variant="primary" onClick={onReturnToLobby}>
+          Tornar al Lobby
+        </Button>
+      ) : (
+        <p>Esperant que el professor torni al lobby...</p>
+      )}
     </main>
   );
 };

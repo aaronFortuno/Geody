@@ -142,6 +142,7 @@ export function registerHandlers(
   socket.on("game:answer",       (p) => handleGameAnswer(socket, io, roomManager, gameEngine, countryLoader, p));
   socket.on("game:next-round",   ()  => handleGameNextRound(socket, io, roomManager, gameEngine, countryLoader));
   socket.on("game:reveal-answer",()  => handleGameRevealAnswer(socket, io, roomManager, gameEngine, countryLoader));
+  socket.on("game:return-lobby", ()  => handleGameReturnToLobby(socket, io, roomManager));
   socket.on("disconnect",        ()  => handleDisconnect(socket, io, roomManager));
 }
 
@@ -464,6 +465,50 @@ export function handleGameRevealAnswer(
     const countries = countryLoader.getCountriesForLocale(room.config.locale);
     endCurrentRound(room as RoomWithRuntime, io, roomManager, gameEngine, countries);
     room.touch();
+  } catch (error) {
+    handleError(socket, error);
+  }
+}
+
+/**
+ * L'amfitrió finalitza/abandona la partida actual i torna tota la sala al lobby.
+ * Manté jugadors i configuració, reinicia puntuacions i rondes.
+ */
+export function handleGameReturnToLobby(
+  socket: TypedSocket,
+  io: TypedServer,
+  roomManager: RoomManager
+): void {
+  try {
+    const code = getRoomCode(socket);
+    if (!code) {
+      throw new Error("ROOM_NOT_FOUND");
+    }
+    const room = roomManager.getRoom(code) as RoomWithRuntime | undefined;
+    if (!room) {
+      throw new Error("ROOM_NOT_FOUND");
+    }
+    if (room.hostId !== socket.id) {
+      throw new Error("NOT_HOST");
+    }
+
+    if (room._timerInterval) {
+      clearInterval(room._timerInterval);
+      room._timerInterval = undefined;
+    }
+
+    room.state = "lobby";
+    room.currentRound = 0;
+    room.rounds = [];
+    for (const player of room.players.values()) {
+      player.score = 0;
+    }
+    room.touch();
+
+    io.to(code).emit("game:returned-lobby", {
+      players: room.getLeaderboard(),
+      config: room.config,
+    });
   } catch (error) {
     handleError(socket, error);
   }
