@@ -18,7 +18,7 @@ import type { CountryLoader } from "../data/CountryLoader.js";
 
 type TypedServer = Server<ClientToServerEvents, ServerToClientEvents>;
 type TypedSocket = Socket<ClientToServerEvents, ServerToClientEvents>;
-type SocketData = { roomCode?: string; lastAnswerAt?: number };
+type SocketData = { roomCode?: string };
 type RoomWithRuntime = Room & { _timerInterval?: ReturnType<typeof setInterval> };
 
 const CLIENT_ORIGIN = process.env["CLIENT_ORIGIN"] ?? "http://localhost:5173";
@@ -545,7 +545,6 @@ export function handleDisconnect(
 /**
  * Un jugador envia una resposta.
  * Valida: partida activa, roundIndex coincideix amb l'actual, no fora de temps.
- * Rate-limit: màx 1 intent/segon en mode "fastest".
  * Crida gameEngine.processAnswer.
  * Emet "game:answer-result" a tota la sala (tots veuen el flaix).
  *
@@ -584,14 +583,6 @@ export function handleGameAnswer(
     const now = Date.now();
     if (now - round.startedAt > room.config.timePerRound * 1000) {
       return;
-    }
-
-    if (room.config.gameType === "fastest") {
-      const lastAnswerAt = getSocketData(socket).lastAnswerAt;
-      if (lastAnswerAt !== undefined && now - lastAnswerAt < 1000) {
-        return;
-      }
-      getSocketData(socket).lastAnswerAt = now;
     }
 
     const countries = countryLoader.getCountriesForLocale(room.config.locale);
