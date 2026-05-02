@@ -20,7 +20,7 @@ export const GlobeCountry: FC<GlobeCountryProps> = ({
   onFlashComplete,
   onClick,
 }) => {
-  const countryId = String(feature.properties?.["ADM0_A3"] ?? "");
+  const countryId = getFeatureCountryId(feature);
   const color = isFlashing ? "#ff4444" : isTarget ? "#ffd700" : "#0b2530";
   const borderGeometries = useMemo(() => buildCountryBorders(feature.geometry), [feature.geometry]);
   const borderLines = useMemo(
@@ -112,4 +112,12 @@ function buildCountryBorders(geometry: GeoJSONGeometry): THREE.BufferGeometry[] 
     }
   }
   return borderGeometries;
+}
+
+function getFeatureCountryId(feature: GeoJSONCountryFeature): string {
+  const isoA3 = String(feature.properties?.["ISO_A3"] ?? "");
+  if (isoA3 && isoA3 !== "-99") {
+    return isoA3;
+  }
+  return String(feature.properties?.["ADM0_A3"] ?? "");
 }

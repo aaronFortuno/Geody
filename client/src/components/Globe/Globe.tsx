@@ -542,7 +542,7 @@ function createMapTexture(
   const path = geoPath(projection, ctx);
 
   for (const feature of features) {
-    const countryId = String(feature.properties?.["ADM0_A3"] ?? "");
+    const countryId = getFeatureCountryId(feature);
     const isFlashing = countryId === flashCountryId;
     const isTarget = countryId === targetCountryId;
     ctx.fillStyle = isFlashing ? "#ff4444" : isTarget ? "#ffd700" : "#8fbc8f";
@@ -627,7 +627,7 @@ function buildBorderLines(features: GeoJSONCountryFeature[]): THREE.Line[] {
 function buildCountryCenters(features: GeoJSONCountryFeature[]): Map<string, { lat: number; lng: number }> {
   const map = new Map<string, { lat: number; lng: number }>();
   for (const feature of features) {
-    const countryId = String(feature.properties?.["ADM0_A3"] ?? "");
+    const countryId = getFeatureCountryId(feature);
     const polys =
       feature.geometry.type === "Polygon"
         ? [feature.geometry.coordinates]
@@ -745,4 +745,12 @@ function getTextureWidthForLod(lod: LodLevel): number {
   if (lod === "10m") return 8192;
   if (lod === "50m") return 6144;
   return 4096;
+}
+
+function getFeatureCountryId(feature: GeoJSONCountryFeature): string {
+  const isoA3 = String(feature.properties?.["ISO_A3"] ?? "");
+  if (isoA3 && isoA3 !== "-99") {
+    return isoA3;
+  }
+  return String(feature.properties?.["ADM0_A3"] ?? "");
 }

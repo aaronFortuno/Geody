@@ -1,19 +1,55 @@
 {
-  "version": "v0.1",
-  "releasedAt": "2026-05-01",
-  "title": "Geody v0.1",
-  "status": "Primera versió pública jugable amb lobby en temps real, rondes de països/capitals, globus 3D interactiu i desplegament actiu a Render + GitHub Pages.",
-  "highlights": [
-    "Sala multijugador amb codi curt i reconnexió de jugadors.",
-    "Modes de joc per països, capitals o mixt.",
-    "Renderitzat estable del globus amb fronteres i capitals.",
-    "Puntuació en directe i flux complet de rondes/resultats."
-  ],
-  "nextFocus": [
-    "Iteracions de UX/UI a lobby i pantalla de joc.",
-    "Millora de feedback visual en respostes i rondes.",
-    "Enduriment de deploy i observabilitat."
-  ],
+  "version": "v0.2",
+  "releasedAt": "2026-05-02",
+  "title": {
+    "ca": "Geody v0.2",
+    "es": "Geody v0.2",
+    "en": "Geody v0.2"
+  },
+  "status": {
+    "ca": "Versio publica amb lobby multijugador estable, etiquetes al globus, millores de render i desplegament actiu a Render + GitHub Pages.",
+    "es": "Version publica con lobby multijugador estable, etiquetas en el globo, mejoras de render y despliegue activo en Render + GitHub Pages.",
+    "en": "Public version with stable multiplayer lobby, globe labels, rendering improvements, and active deployment on Render + GitHub Pages."
+  },
+  "highlights": {
+    "ca": [
+      "Retorn al lobby sense recrear sala ni tornar a unir usuaris.",
+      "Globus landing interactiu amb canvis visuals i versions publicades.",
+      "LOD dinamica 110m/50m/10m en zoom.",
+      "Correccions de validacio de respostes per tipus (pais/capital)."
+    ],
+    "es": [
+      "Vuelta al lobby sin recrear sala ni volver a unir usuarios.",
+      "Globo de landing interactivo con mejoras visuales y versiones publicadas.",
+      "LOD dinamica 110m/50m/10m con el zoom.",
+      "Correcciones de validacion de respuestas por tipo (pais/capital)."
+    ],
+    "en": [
+      "Return to lobby without recreating room or rejoining users.",
+      "Interactive landing globe with visual improvements and published versions.",
+      "Dynamic 110m/50m/10m zoom LOD.",
+      "Answer validation fixes by round type (country/capital)."
+    ]
+  },
+  "nextFocus": {
+    "ca": [
+      "Iteracions de UX/UI a totes les pantalles de joc.",
+      "Pulit de marcadors/etiquetes i colisions visuals.",
+      "Mes observabilitat i QA automatitzada."
+    ],
+    "es": [
+      "Iteraciones UX/UI en todas las pantallas del juego.",
+      "Pulido de marcadores/etiquetas y colisiones visuales.",
+      "Mas observabilidad y QA automatizada."
+    ],
+    "en": [
+      "UX/UI iterations across all game screens.",
+      "Marker/label polish and visual-collision handling.",
+      "More observability and automated QA."
+    ]
+  },
   "license": "MIT",
-  "changelogPath": "CHANGELOG.md"
+  "changelogPath": "CHANGELOG.md",
+  "portfolioUrl": "https://aaronfortuno.github.io/portfolio/",
+  "tipsLightningAddress": "aptswim903@walletofsatoshi.com"
 }

@@ -1,17 +1,17 @@
-// Re-exporta tots els tipus compartits per a ús intern del client.
-// Afegeix aquí tipus exclusius del client si cal.
+// Shared types for client usage.
 export * from "@geody/shared";
 
 export type GeoJSONGeometry =
   | { type: "Polygon"; coordinates: number[][][] }
   | { type: "MultiPolygon"; coordinates: number[][][][] };
 
-/** Tipus de la resposta local del GeoJSON carregat. */
+/** Shape of country features loaded from local Natural Earth GeoJSON files. */
 export interface GeoJSONCountryFeature {
   type: "Feature";
   properties: {
-    ADM0_A3: string;    // ISO3 (coincideix amb CountryData.id)
-    NAME: string;       // Nom en anglès (no usar per al joc, només per a debug)
+    ISO_A3?: string; // Canonical ISO3 code.
+    ADM0_A3: string; // Natural Earth legacy code (fallback).
+    NAME: string;
   };
   geometry: GeoJSONGeometry;
 }

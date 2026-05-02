@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import type { GameResult } from "@geody/shared";
+import { useI18n } from "../../i18n/I18nProvider.js";
 import { Button, Podium } from "../UI/index.js";
 
 interface FinalResultsProps {
@@ -8,39 +9,26 @@ interface FinalResultsProps {
   onReturnToLobby: () => void;
 }
 
-/**
- * Pantalla de resultats finals.
- *
- * Estructura:
- * 1. Podi animat (top 3): entrades escalonades en altura
- * 2. Classificació completa amb estadístiques per jugador:
- *    - Total de punts
- *    - Encerts / Total rondes
- *    - Millor ratxa
- *    - Temps de resposta mig
- * 3. Botó "Tornar al Lobby" (visible per a tothom, inicia nova partida)
- *
- * Les animacions del podi: el 3r apareix primer, llavors el 2n, llavors el 1r
- * (efecte Kahoot). Cada entrada fa un "bounce" en aparèixer.
- */
 export const FinalResults: FC<FinalResultsProps> = ({
   result,
   isHost,
   onReturnToLobby,
 }) => {
+  const { t } = useI18n();
+
   return (
     <main className="final-results">
-      <h1>Resultats finals</h1>
+      <h1>{t("results.finalTitle")}</h1>
       <Podium podium={result.podium} />
       <section className="panel">
-        <h2>Classificació completa</h2>
+        <h2>{t("results.fullRanking")}</h2>
         <ol className="stats-list">
           {result.finalScores.map((player) => (
             <li key={player.playerId}>
               <strong>{player.name}</strong>
-              <span>{player.totalScore} pts</span>
-              <span>{player.correctAnswers} encerts</span>
-              <span>Ratxa {player.bestStreak}</span>
+              <span>{t("results.points", { value: player.totalScore })}</span>
+              <span>{t("results.correctAnswers", { value: player.correctAnswers })}</span>
+              <span>{t("results.streak", { value: player.bestStreak })}</span>
               <span>{(player.averageResponseTimeMs / 1000).toFixed(1)}s</span>
             </li>
           ))}
@@ -48,11 +36,12 @@ export const FinalResults: FC<FinalResultsProps> = ({
       </section>
       {isHost ? (
         <Button variant="primary" onClick={onReturnToLobby}>
-          Tornar al Lobby
+          {t("results.backToLobby")}
         </Button>
       ) : (
-        <p>Esperant que el professor torni al lobby...</p>
+        <p>{t("results.waitingHost")}</p>
       )}
     </main>
   );
 };
+

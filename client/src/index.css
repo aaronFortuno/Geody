@@ -54,6 +54,17 @@ button, input, select {
   font: inherit;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 a {
   color: var(--color-highlight);
   overflow-wrap: anywhere;
@@ -219,6 +230,35 @@ select.ui-input option {
   z-index: 4;
 }
 
+.home-screen__language {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(15, 25, 35, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.home-screen__language-select {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.8rem;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+}
+
+.home-screen__language-select option {
+  color: #101722;
+}
+
 .home-screen__version {
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(15, 25, 35, 0.74);
@@ -288,6 +328,38 @@ select.ui-input option {
 .modal-card__links a {
   color: var(--color-highlight);
   font-weight: 700;
+}
+
+.tips-card {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(6, 18, 28, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.tips-card__title {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.tips-card code {
+  color: #f0fbff;
+  font-size: 0.82rem;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tips-card img {
+  width: 130px;
+  height: 130px;
+  border-radius: 10px;
+  background: white;
+  padding: 6px;
 }
 
 .panel {
@@ -734,6 +806,11 @@ select.ui-input option {
 
   .home-screen__footer {
     right: 14px;
+  }
+
+  .home-screen__language {
+    right: 12px;
+    top: 10px;
   }
 
   .answer-input {

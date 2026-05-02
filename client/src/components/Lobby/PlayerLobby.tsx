@@ -1,9 +1,9 @@
 import { useState, type FC } from "react";
 import type { Player } from "@geody/shared";
+import { useI18n } from "../../i18n/I18nProvider.js";
 import { Button, Input } from "../UI/index.js";
 
 interface PlayerLobbyProps {
-  /** Si null, l'alumne encara no ha entrat a cap sala (mostra el formulari). */
   roomCode: string | null;
   players: Player[];
   myPlayerId: string | null;
@@ -11,23 +11,6 @@ interface PlayerLobbyProps {
   onJoin: (code: string, name: string) => void;
 }
 
-/**
- * Lobby de l'alumne.
- *
- * Fase 1 (roomCode === null):
- *   - Input "Codi de sala" (6 chars, automàticament majúscules)
- *   - Input "El teu nom" (max 20 chars)
- *   - Botó "Unir-se"
- *   - Missatge d'error si n'hi ha (sala no trobada, plena...)
- *
- * Fase 2 (roomCode !== null):
- *   - Text: "Sala: {roomCode}"
- *   - Estat: "Esperant que el professor iniciï la partida..."
- *   - Llista dels jugadors connectats
- *   - Avatar/nom del propi jugador ressaltat
- *
- * En Fase 1, si la URL conté ?code=XXXXX, pre-omple el camp de codi.
- */
 export const PlayerLobby: FC<PlayerLobbyProps> = ({
   roomCode,
   players,
@@ -35,6 +18,7 @@ export const PlayerLobby: FC<PlayerLobbyProps> = ({
   error,
   onJoin,
 }) => {
+  const { t } = useI18n();
   const initialCode = new URLSearchParams(window.location.search).get("code") ?? "";
   const [code, setCode] = useState(initialCode.toUpperCase());
   const [name, setName] = useState("");
@@ -43,9 +27,9 @@ export const PlayerLobby: FC<PlayerLobbyProps> = ({
     return (
       <main className="lobby">
         <section className="panel">
-          <p className="eyebrow">Sala</p>
+          <p className="eyebrow">{t("lobby.room")}</p>
           <h1>{roomCode}</h1>
-          <p>Esperant que el professor iniciï la partida...</p>
+          <p>{t("lobby.waitingHost")}</p>
           <ul className="player-list">
             {players.map((player) => (
               <li
@@ -71,9 +55,9 @@ export const PlayerLobby: FC<PlayerLobbyProps> = ({
           if (code.trim() && name.trim()) onJoin(code, name);
         }}
       >
-        <h1>Unir-se a una sala</h1>
+        <h1>{t("lobby.joinRoom")}</h1>
         <Input
-          label="Codi de sala"
+          label={t("lobby.roomCode")}
           value={code}
           maxLength={6}
           onChange={(event) => setCode(event.target.value.toUpperCase())}
@@ -81,18 +65,19 @@ export const PlayerLobby: FC<PlayerLobbyProps> = ({
           autoComplete="off"
         />
         <Input
-          label="El teu nom"
+          label={t("lobby.yourName")}
           value={name}
           maxLength={20}
           onChange={(event) => setName(event.target.value)}
-          placeholder="Nom"
+          placeholder={t("lobby.placeholderName")}
           autoComplete="name"
           error={error ?? undefined}
         />
         <Button type="submit" size="lg" fullWidth disabled={!code.trim() || !name.trim()}>
-          Unir-se
+          {t("lobby.joinButton")}
         </Button>
       </form>
     </main>
   );
 };
+

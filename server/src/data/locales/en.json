@@ -4,7 +4,7 @@
     "capital": "Oranjestad"
   },
   "AFG": {
-    "country": "Afganistan",
+    "country": "Afghanistan",
     "capital": "Kabul"
   },
   "AGO": {
@@ -24,7 +24,7 @@
     "capital": "Andorra la Vella"
   },
   "ARE": {
-    "country": "Emiratos Árabes Unidos",
+    "country": "United Arab Emirates",
     "capital": "Abu Dhabi"
   },
   "ARG": {
@@ -36,23 +36,22 @@
     "capital": "Yerevan"
   },
   "ATG": {
-    "country": "Antigua y Barbuda",
+    "country": "Antigua and Barbuda",
     "capital": "Saint John's"
   },
   "AUS": {
-    "country": "Austràlia",
+    "country": "Australia",
     "capital": "Canberra"
   },
   "AUT": {
-    "country": "Àustria",
-    "capital": "Viena",
-    "acceptedVariants": [
-      "Wien",
-      "Vienna"
+    "country": "Austria",
+    "capital": "Vienna",
+    "acceptedCapitalVariants": [
+      "Wien"
     ]
   },
   "AZE": {
-    "country": "Azerbaiyán",
+    "country": "Azerbaijan",
     "capital": "Baku"
   },
   "BDI": {
@@ -60,15 +59,14 @@
     "capital": "Gitega"
   },
   "BEL": {
-    "country": "Bèlgica",
-    "capital": "Brussel·les",
-    "acceptedVariants": [
-      "Brussels",
+    "country": "Belgium",
+    "capital": "Brussels",
+    "acceptedCapitalVariants": [
       "Bruxelles"
     ]
   },
   "BEN": {
-    "country": "Benín",
+    "country": "Benin",
     "capital": "Porto-Novo"
   },
   "BFA": {
@@ -76,41 +74,44 @@
     "capital": "Ouagadougou"
   },
   "BGD": {
-    "country": "Bangladés",
+    "country": "Bangladesh",
     "capital": "Dhaka"
   },
   "BGR": {
-    "country": "Bulgària",
+    "country": "Bulgaria",
     "capital": "Sofia"
   },
   "BHR": {
-    "country": "Baréin",
+    "country": "Bahrain",
     "capital": "Manama"
   },
   "BHS": {
-    "country": "Bahamas",
+    "country": "The Bahamas",
     "capital": "Nassau"
   },
   "BIH": {
-    "country": "Bosnia y Herzegovina",
+    "country": "Bosnia and Herzegovina",
     "capital": "Sarajevo"
   },
   "BLR": {
-    "country": "Bielorrusia",
+    "country": "Belarus",
     "capital": "Minsk"
   },
   "BLZ": {
-    "country": "Belice",
+    "country": "Belize",
     "capital": "Belmopan"
   },
   "BOL": {
-    "country": "Bolívia",
-    "capital": "Sucre"
+    "country": "Bolivia",
+    "capital": "Sucre",
+    "acceptedCapitalVariants": [
+      "La Paz"
+    ]
   },
   "BRA": {
-    "country": "Brasil",
+    "country": "Brazil",
     "capital": "Brasília",
-    "acceptedVariants": [
+    "acceptedCapitalVariants": [
       "Brasilia"
     ]
   },
@@ -119,108 +120,108 @@
     "capital": "Bridgetown"
   },
   "BRN": {
-    "country": "Brunéi",
+    "country": "Brunei",
     "capital": "Bandar Seri Begawan"
   },
   "BTN": {
-    "country": "Bután",
+    "country": "Bhutan",
     "capital": "Thimphu"
   },
   "BWA": {
-    "country": "Botsuana",
+    "country": "Botswana",
     "capital": "Gaborone"
   },
   "CAF": {
-    "country": "República Centroafricana",
+    "country": "Central African Republic",
     "capital": "Bangui"
   },
   "CAN": {
-    "country": "Canadà",
+    "country": "Canada",
     "capital": "Ottawa"
   },
   "CHE": {
-    "country": "Suïssa",
-    "capital": "Berna",
-    "acceptedVariants": [
-      "Bern"
+    "country": "Switzerland",
+    "capital": "Bern",
+    "acceptedCapitalVariants": [
+      "Berne"
     ]
   },
   "CHL": {
-    "country": "Xile",
+    "country": "Chile",
     "capital": "Santiago"
   },
   "CHN": {
-    "country": "Xina",
-    "capital": "Pequín",
-    "acceptedVariants": [
-      "Beijing",
+    "country": "People's Republic of China",
+    "capital": "Beijing",
+    "acceptedCapitalVariants": [
       "Peking"
     ]
   },
   "CIV": {
-    "country": "Costa de Marfil",
+    "country": "Ivory Coast",
     "capital": "Yamoussoukro"
   },
   "CMR": {
-    "country": "Camerun",
-    "capital": "Iaundé",
-    "acceptedVariants": [
-      "Yaounde",
-      "Yaoundé"
+    "country": "Cameroon",
+    "capital": "Yaoundé",
+    "acceptedCapitalVariants": [
+      "Yaounde"
     ]
   },
   "COD": {
-    "country": "República Democrática del Congo",
+    "country": "Democratic Republic of the Congo",
     "capital": "Kinshasa"
   },
   "COG": {
-    "country": "República del Congo",
+    "country": "Republic of the Congo",
     "capital": "Brazzaville"
   },
   "COL": {
-    "country": "Colòmbia",
-    "capital": "Bogotà",
-    "acceptedVariants": [
+    "country": "Colombia",
+    "capital": "Bogotá",
+    "acceptedCapitalVariants": [
       "Bogota"
     ]
   },
   "COM": {
-    "country": "Comoras",
+    "country": "Comoros",
     "capital": "Moroni"
   },
   "CPV": {
-    "country": "Cabo Verde",
+    "country": "Cape Verde",
     "capital": "Praia"
   },
   "CRI": {
     "country": "Costa Rica",
-    "capital": "San José"
+    "capital": "San José",
+    "acceptedCapitalVariants": [
+      "San Jose"
+    ]
   },
   "CUW": {
-    "country": "Curazao",
+    "country": "Curaçao",
     "capital": "Willemstad"
   },
   "CYP": {
-    "country": "Chipre",
+    "country": "Cyprus",
     "capital": "Nicosia"
   },
   "CZE": {
-    "country": "República Txeca",
-    "capital": "Praga",
-    "acceptedVariants": [
-      "Praha",
-      "Prague"
+    "country": "Czech Republic",
+    "capital": "Prague",
+    "acceptedCountryVariants": [
+      "Czech Republic"
+    ],
+    "acceptedCapitalVariants": [
+      "Praha"
     ]
   },
   "DEU": {
-    "country": "Alemanya",
-    "capital": "Berlín",
-    "acceptedVariants": [
-      "Berlin"
-    ]
+    "country": "Germany",
+    "capital": "Berlin"
   },
   "DJI": {
-    "country": "Yibuti",
+    "country": "Djibouti",
     "capital": "Djibouti"
   },
   "DMA": {
@@ -228,33 +229,33 @@
     "capital": "Roseau"
   },
   "DNK": {
-    "country": "Dinamarca",
-    "capital": "Copenhaguen",
-    "acceptedVariants": [
-      "Copenhagen",
+    "country": "Denmark",
+    "capital": "Copenhagen",
+    "acceptedCapitalVariants": [
+      "Kobenhavn",
       "København"
     ]
   },
   "DOM": {
-    "country": "República Dominicana",
+    "country": "Dominican Republic",
     "capital": "Santo Domingo"
   },
   "DZA": {
-    "country": "Algèria",
-    "capital": "Alger",
-    "acceptedVariants": [
-      "Algiers"
+    "country": "Algeria",
+    "capital": "Algiers",
+    "acceptedCapitalVariants": [
+      "Alger"
     ]
   },
   "ECU": {
-    "country": "Equador",
+    "country": "Ecuador",
     "capital": "Quito"
   },
   "EGY": {
-    "country": "Egipte",
-    "capital": "El Caire",
-    "acceptedVariants": [
-      "Cairo"
+    "country": "Egypt",
+    "capital": "Cairo",
+    "acceptedCapitalVariants": [
+      "Al Qahirah"
     ]
   },
   "ERI": {
@@ -262,7 +263,7 @@
     "capital": "Asmara"
   },
   "ESP": {
-    "country": "Espanya",
+    "country": "Spain",
     "capital": "Madrid"
   },
   "EST": {
@@ -270,36 +271,32 @@
     "capital": "Tallinn"
   },
   "ETH": {
-    "country": "Etiòpia",
-    "capital": "Addis Abeba",
-    "acceptedVariants": [
-      "Addis Ababa"
-    ]
+    "country": "Ethiopia",
+    "capital": "Addis Ababa"
   },
   "FIN": {
-    "country": "Finlàndia",
-    "capital": "Hèlsinki",
-    "acceptedVariants": [
-      "Helsinki"
-    ]
+    "country": "Finland",
+    "capital": "Helsinki"
   },
   "FJI": {
     "country": "Fiji",
     "capital": "Suva"
   },
   "FSM": {
-    "country": "Estados Federados de Micronesia",
+    "country": "Federated States of Micronesia",
     "capital": "Palikir"
   },
   "GAB": {
-    "country": "Gabón",
+    "country": "Gabon",
     "capital": "Libreville"
   },
   "GBR": {
-    "country": "Regne Unit",
-    "capital": "Londres",
-    "acceptedVariants": [
-      "London"
+    "country": "United Kingdom",
+    "capital": "London",
+    "acceptedCountryVariants": [
+      "UK",
+      "Great Britain",
+      "Britain"
     ]
   },
   "GEO": {
@@ -319,38 +316,37 @@
     "capital": "Conakry"
   },
   "GMB": {
-    "country": "Gambia",
+    "country": "The Gambia",
     "capital": "Banjul"
   },
   "GNB": {
-    "country": "Guinea-Bisáu",
+    "country": "Guinea-Bissau",
     "capital": "Bissau"
   },
   "GNQ": {
-    "country": "Guinea Ecuatorial",
+    "country": "Equatorial Guinea",
     "capital": "Ciudad de la Paz"
   },
   "GRC": {
-    "country": "Grècia",
-    "capital": "Atenes",
-    "acceptedVariants": [
-      "Athens",
+    "country": "Greece",
+    "capital": "Athens",
+    "acceptedCapitalVariants": [
       "Athina"
     ]
   },
   "GRD": {
-    "country": "Granada",
+    "country": "Grenada",
     "capital": "St. George's"
   },
   "GRL": {
-    "country": "Groenlandia",
+    "country": "Greenland",
     "capital": "Nuuk"
   },
   "GTM": {
     "country": "Guatemala",
-    "capital": "Ciutat de Guatemala",
-    "acceptedVariants": [
-      "Guatemala City"
+    "capital": "Guatemala City",
+    "acceptedCapitalVariants": [
+      "Ciudad de Guatemala"
     ]
   },
   "GUY": {
@@ -366,57 +362,57 @@
     "capital": "Tegucigalpa"
   },
   "HRV": {
-    "country": "Croàcia",
+    "country": "Croatia",
     "capital": "Zagreb"
   },
   "HTI": {
-    "country": "Haití",
+    "country": "Haiti",
     "capital": "Port-au-Prince"
   },
   "HUN": {
-    "country": "Hongria",
+    "country": "Hungary",
     "capital": "Budapest"
   },
   "IDN": {
-    "country": "Indonèsia",
-    "capital": "Jakarta"
+    "country": "Indonesia",
+    "capital": "Jakarta",
+    "acceptedCapitalVariants": [
+      "Yakarta"
+    ]
   },
   "IMN": {
-    "country": "Isla de Man",
+    "country": "Isle of Man",
     "capital": "Douglas"
   },
   "IND": {
-    "country": "Índia",
-    "capital": "Nova Delhi",
-    "acceptedVariants": [
-      "New Delhi"
-    ]
+    "country": "India",
+    "capital": "New Delhi"
   },
   "IRL": {
-    "country": "Irlanda",
+    "country": "Ireland",
     "capital": "Dublin"
   },
   "IRN": {
     "country": "Iran",
-    "capital": "Teheran",
-    "acceptedVariants": [
-      "Tehran"
+    "capital": "Tehran",
+    "acceptedCapitalVariants": [
+      "Teheran"
     ]
   },
   "IRQ": {
     "country": "Iraq",
-    "capital": "Bagdad",
-    "acceptedVariants": [
-      "Baghdad"
+    "capital": "Baghdad",
+    "acceptedCapitalVariants": [
+      "Bagdad"
     ]
   },
   "ISL": {
-    "country": "Islandia",
+    "country": "Iceland",
     "capital": "Reykjavik"
   },
   "ITA": {
-    "country": "Itàlia",
-    "capital": "Roma"
+    "country": "Italy",
+    "capital": "Rome"
   },
   "JAM": {
     "country": "Jamaica",
@@ -427,14 +423,13 @@
     "capital": "Saint Helier"
   },
   "JOR": {
-    "country": "Jordania",
+    "country": "Jordan",
     "capital": "Amman"
   },
   "JPN": {
-    "country": "Japó",
-    "capital": "Tòquio",
-    "acceptedVariants": [
-      "Tokyo",
+    "country": "Japan",
+    "capital": "Tokyo",
+    "acceptedCapitalVariants": [
       "Tokio"
     ]
   },
@@ -443,11 +438,11 @@
     "capital": "Nairobi"
   },
   "KGZ": {
-    "country": "Kirguistán",
+    "country": "Kyrgyzstan",
     "capital": "Bishkek"
   },
   "KHM": {
-    "country": "Camboya",
+    "country": "Cambodia",
     "capital": "Phnom Penh"
   },
   "KIR": {
@@ -455,14 +450,14 @@
     "capital": "South Tarawa"
   },
   "KNA": {
-    "country": "San Cristóbal y Nieves",
+    "country": "Saint Kitts and Nevis",
     "capital": "Basseterre"
   },
   "KOR": {
-    "country": "Corea del Sud",
-    "capital": "Seül",
-    "acceptedVariants": [
-      "Seoul"
+    "country": "South Korea",
+    "capital": "Seoul",
+    "acceptedCountryVariants": [
+      "Republic of Korea"
     ]
   },
   "KWT": {
@@ -474,7 +469,7 @@
     "capital": "Vientiane"
   },
   "LBN": {
-    "country": "Líbano",
+    "country": "Lebanon",
     "capital": "Beirut"
   },
   "LBR": {
@@ -482,11 +477,11 @@
     "capital": "Monrovia"
   },
   "LBY": {
-    "country": "Libia",
+    "country": "Libya",
     "capital": "Tripoli"
   },
   "LCA": {
-    "country": "Santa Lucía",
+    "country": "Saint Lucia",
     "capital": "Castries"
   },
   "LIE": {
@@ -498,35 +493,35 @@
     "capital": "Sri Jayawardenepura Kotte"
   },
   "LSO": {
-    "country": "Lesoto",
+    "country": "Lesotho",
     "capital": "Maseru"
   },
   "LTU": {
-    "country": "Lituania",
+    "country": "Lithuania",
     "capital": "Vilnius"
   },
   "LUX": {
-    "country": "Luxemburgo",
+    "country": "Luxembourg",
     "capital": "Luxembourg"
   },
   "LVA": {
-    "country": "Letonia",
+    "country": "Latvia",
     "capital": "Riga"
   },
   "MAC": {
-    "country": "Macao",
+    "country": "Macau",
     "capital": "Macau"
   },
   "MAR": {
-    "country": "Marroc",
+    "country": "Morocco",
     "capital": "Rabat"
   },
   "MCO": {
-    "country": "Mónaco",
+    "country": "Monaco",
     "capital": "Monaco"
   },
   "MDA": {
-    "country": "Moldavia",
+    "country": "Moldova",
     "capital": "Chișinău"
   },
   "MDG": {
@@ -534,26 +529,24 @@
     "capital": "Antananarivo"
   },
   "MEX": {
-    "country": "Mèxic",
-    "capital": "Ciutat de Mèxic",
-    "acceptedVariants": [
-      "Mexico",
-      "Mexico City"
-    ],
-    "acceptedCountryVariants": [
-      "Mexico"
+    "country": "Mexico",
+    "capital": "Mexico City",
+    "acceptedCapitalVariants": [
+      "Ciudad de Mexico",
+      "Ciudad de México",
+      "CDMX"
     ]
   },
   "MHL": {
-    "country": "Islas Marshall",
+    "country": "Marshall Islands",
     "capital": "Majuro"
   },
   "MKD": {
-    "country": "Macedonia del Norte",
+    "country": "North Macedonia",
     "capital": "Skopje"
   },
   "MLI": {
-    "country": "Malí",
+    "country": "Mali",
     "capital": "Bamako"
   },
   "MLT": {
@@ -561,7 +554,7 @@
     "capital": "Valletta"
   },
   "MMR": {
-    "country": "Birmania",
+    "country": "Myanmar",
     "capital": "Naypyidaw"
   },
   "MNE": {
@@ -581,11 +574,11 @@
     "capital": "Nouakchott"
   },
   "MWI": {
-    "country": "Malaui",
+    "country": "Malawi",
     "capital": "Lilongwe"
   },
   "MYS": {
-    "country": "Malàisia",
+    "country": "Malaysia",
     "capital": "Kuala Lumpur"
   },
   "NAM": {
@@ -593,11 +586,11 @@
     "capital": "Windhoek"
   },
   "NER": {
-    "country": "Níger",
+    "country": "Niger",
     "capital": "Niamey"
   },
   "NGA": {
-    "country": "Nigèria",
+    "country": "Nigeria",
     "capital": "Abuja"
   },
   "NIC": {
@@ -605,13 +598,11 @@
     "capital": "Managua"
   },
   "NLD": {
-    "country": "Països Baixos",
+    "country": "Netherlands",
     "capital": "Amsterdam",
-    "acceptedVariants": [
-      "Holanda"
-    ],
     "acceptedCountryVariants": [
-      "Holanda"
+      "Holland",
+      "The Netherlands"
     ]
   },
   "NPL": {
@@ -623,11 +614,11 @@
     "capital": "Yaren"
   },
   "NZL": {
-    "country": "Nova Zelanda",
+    "country": "New Zealand",
     "capital": "Wellington"
   },
   "OMN": {
-    "country": "Omán",
+    "country": "Oman",
     "capital": "Muscat"
   },
   "PAK": {
@@ -635,87 +626,86 @@
     "capital": "Islamabad"
   },
   "PAN": {
-    "country": "Panamà",
-    "capital": "Ciutat de Panamà",
-    "acceptedVariants": [
-      "Panama City"
+    "country": "Panama",
+    "capital": "Panama City",
+    "acceptedCapitalVariants": [
+      "Ciudad de Panama",
+      "Ciudad de Panamá"
     ]
   },
   "PER": {
-    "country": "Perú",
+    "country": "Peru",
     "capital": "Lima"
   },
   "PHL": {
-    "country": "Filipines",
+    "country": "Philippines",
     "capital": "Manila"
   },
   "PLW": {
-    "country": "Palaos",
+    "country": "Palau",
     "capital": "Ngerulmud"
   },
   "PNG": {
-    "country": "Papua Nova Guinea",
+    "country": "Papua New Guinea",
     "capital": "Port Moresby"
   },
   "POL": {
-    "country": "Polònia",
-    "capital": "Varsòvia",
-    "acceptedVariants": [
-      "Warsaw",
+    "country": "Poland",
+    "capital": "Warsaw",
+    "acceptedCapitalVariants": [
       "Warszawa"
     ]
   },
   "PRK": {
-    "country": "Corea del Norte",
+    "country": "North Korea",
     "capital": "Pyongyang"
   },
   "PRT": {
     "country": "Portugal",
-    "capital": "Lisboa"
+    "capital": "Lisbon"
   },
   "PRY": {
-    "country": "Paraguai",
+    "country": "Paraguay",
     "capital": "Asunción",
-    "acceptedVariants": [
+    "acceptedCapitalVariants": [
       "Asuncion"
     ]
   },
   "QAT": {
-    "country": "Catar",
+    "country": "Qatar",
     "capital": "Doha"
   },
   "ROU": {
     "country": "Romania",
-    "capital": "Bucarest",
-    "acceptedVariants": [
-      "Bucharest",
+    "capital": "Bucharest",
+    "acceptedCapitalVariants": [
+      "Bucuresti",
       "București"
     ]
   },
   "RUS": {
-    "country": "Rússia",
-    "capital": "Moscou",
-    "acceptedVariants": [
-      "Moscow",
+    "country": "Russia",
+    "capital": "Moscow",
+    "acceptedCapitalVariants": [
       "Moskva"
     ]
   },
   "RWA": {
-    "country": "Ruanda",
+    "country": "Rwanda",
     "capital": "Kigali"
   },
   "SAU": {
-    "country": "Aràbia Saudita",
-    "capital": "Riad",
-    "acceptedVariants": [
-      "Riyadh"
+    "country": "Saudi Arabia",
+    "capital": "Riyadh",
+    "acceptedCapitalVariants": [
+      "Ar Riyadh"
     ]
   },
   "SDN": {
     "country": "Sudan",
-    "capital": "Khartum",
-    "acceptedVariants": [
-      "Khartoum"
+    "capital": "Khartoum",
+    "acceptedCapitalVariants": [
+      "Kartoum"
     ]
   },
   "SEN": {
@@ -723,15 +713,15 @@
     "capital": "Dakar"
   },
   "SGP": {
-    "country": "Singapur",
+    "country": "Singapore",
     "capital": "Singapore"
   },
   "SLB": {
-    "country": "Islas Salomón",
+    "country": "Solomon Islands",
     "capital": "Honiara"
   },
   "SLE": {
-    "country": "Sierra Leona",
+    "country": "Sierra Leone",
     "capital": "Freetown"
   },
   "SLV": {
@@ -747,50 +737,46 @@
     "capital": "Mogadishu"
   },
   "SRB": {
-    "country": "Sèrbia",
-    "capital": "Belgrad",
-    "acceptedVariants": [
-      "Belgrade",
+    "country": "Serbia",
+    "capital": "Belgrade",
+    "acceptedCapitalVariants": [
       "Beograd"
     ]
   },
   "SSD": {
-    "country": "Sudán del Sur",
+    "country": "South Sudan",
     "capital": "Juba"
   },
   "STP": {
-    "country": "Santo Tomé y Príncipe",
+    "country": "São Tomé and Príncipe",
     "capital": "São Tomé"
   },
   "SUR": {
-    "country": "Surinam",
+    "country": "Suriname",
     "capital": "Paramaribo"
   },
   "SVK": {
-    "country": "Eslovaquia",
+    "country": "Slovakia",
     "capital": "Bratislava"
   },
   "SVN": {
-    "country": "Eslovenia",
+    "country": "Slovenia",
     "capital": "Ljubljana"
   },
   "SWE": {
-    "country": "Suècia",
-    "capital": "Estocolm",
-    "acceptedVariants": [
-      "Stockholm"
-    ]
+    "country": "Sweden",
+    "capital": "Stockholm"
   },
   "SWZ": {
-    "country": "Suazilandia",
+    "country": "Eswatini",
     "capital": "Mbabane"
   },
   "SXM": {
-    "country": "San Martín",
+    "country": "Sint Maarten",
     "capital": "Philipsburg"
   },
   "SYR": {
-    "country": "Siria",
+    "country": "Syria",
     "capital": "Damascus"
   },
   "TCD": {
@@ -802,19 +788,19 @@
     "capital": "Lomé"
   },
   "THA": {
-    "country": "Tailàndia",
+    "country": "Thailand",
     "capital": "Bangkok"
   },
   "TJK": {
-    "country": "Tayikistán",
+    "country": "Tajikistan",
     "capital": "Dushanbe"
   },
   "TKM": {
-    "country": "Turkmenistán",
+    "country": "Turkmenistan",
     "capital": "Ashgabat"
   },
   "TLS": {
-    "country": "Timor Oriental",
+    "country": "East Timor",
     "capital": "Dili"
   },
   "TON": {
@@ -822,15 +808,15 @@
     "capital": "Nuku'alofa"
   },
   "TTO": {
-    "country": "Trinidad y Tobago",
+    "country": "Trinidad and Tobago",
     "capital": "Port of Spain"
   },
   "TUN": {
-    "country": "Túnez",
+    "country": "Tunisia",
     "capital": "Tunis"
   },
   "TUR": {
-    "country": "Turquia",
+    "country": "Turkey",
     "capital": "Ankara"
   },
   "TUV": {
@@ -838,11 +824,11 @@
     "capital": "Funafuti"
   },
   "TWN": {
-    "country": "República de China",
+    "country": "Taiwan",
     "capital": "Taipei"
   },
   "TZA": {
-    "country": "Tanzània",
+    "country": "Tanzania",
     "capital": "Dodoma"
   },
   "UGA": {
@@ -850,49 +836,53 @@
     "capital": "Kampala"
   },
   "UKR": {
-    "country": "Ucraïna",
-    "capital": "Kíiv",
-    "acceptedVariants": [
-      "Kyiv",
+    "country": "Ukraine",
+    "capital": "Kyiv",
+    "acceptedCapitalVariants": [
       "Kiev"
     ]
   },
   "URY": {
-    "country": "Uruguai",
+    "country": "Uruguay",
     "capital": "Montevideo"
   },
   "USA": {
-    "country": "Estats Units",
-    "capital": "Washington D.C.",
-    "acceptedVariants": [
-      "Washington",
-      "EUA",
-      "USA"
-    ],
+    "country": "United States of America",
+    "capital": "Washington, D.C.",
     "acceptedCountryVariants": [
-      "EUA",
-      "USA"
+      "United States of America",
+      "USA",
+      "US",
+      "America"
+    ],
+    "acceptedCapitalVariants": [
+      "Washington DC",
+      "Washington D.C.",
+      "Washington"
     ]
   },
   "UZB": {
-    "country": "Uzbekistán",
+    "country": "Uzbekistan",
     "capital": "Tashkent"
   },
   "VAT": {
-    "country": "Ciudad del Vaticano",
+    "country": "Vatican City",
     "capital": "Vatican City"
   },
   "VCT": {
-    "country": "San Vicente y las Granadinas",
+    "country": "Saint Vincent and the Grenadines",
     "capital": "Kingstown"
   },
   "VEN": {
-    "country": "Veneçuela",
+    "country": "Venezuela",
     "capital": "Caracas"
   },
   "VNM": {
     "country": "Vietnam",
-    "capital": "Hanoi"
+    "capital": "Hanoi",
+    "acceptedCapitalVariants": [
+      "Ha Noi"
+    ]
   },
   "VUT": {
     "country": "Vanuatu",
@@ -907,19 +897,15 @@
     "capital": "Sana'a"
   },
   "ZAF": {
-    "country": "Sud-àfrica",
-    "capital": "Pretòria",
-    "acceptedVariants": [
-      "Pretoria",
-      "Johannesburg"
-    ]
+    "country": "South Africa",
+    "capital": "Pretoria"
   },
   "ZMB": {
     "country": "Zambia",
     "capital": "Lusaka"
   },
   "ZWE": {
-    "country": "Zimbabue",
+    "country": "Zimbabwe",
     "capital": "Harare"
   }
 }

@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import type { GameState } from "../../hooks/useGame.js";
 import type { GameConfig } from "@geody/shared";
+import { useI18n } from "../../i18n/I18nProvider.js";
 import { Globe } from "../Globe/index.js";
 import { Button } from "../UI/index.js";
 import { AnswerInput } from "./AnswerInput.js";
@@ -46,6 +47,7 @@ export const GameScreen: FC<GameScreenProps> = ({
   onRevealAnswer,
   onEndGame,
 }) => {
+  const { t } = useI18n();
   const round = state.currentRound;
   const totalRounds = config.totalRounds;
   const flashLabels = state.flashLabels.map((entry) => ({
@@ -63,9 +65,9 @@ export const GameScreen: FC<GameScreenProps> = ({
         <div className="game-screen__topbar">
           <div className="game-screen__meta">
             <span>
-              Ronda {round ? round.index + 1 : "-"} / {totalRounds}
+              {t("game.round")} {round ? round.index + 1 : "-"} / {totalRounds}
             </span>
-            {state.roomCode ? <span className="game-screen__room-code">Sala {state.roomCode}</span> : null}
+            {state.roomCode ? <span className="game-screen__room-code">{t("game.room")} {state.roomCode}</span> : null}
           </div>
           <Timer
             seconds={state.timeRemaining}
@@ -99,16 +101,16 @@ export const GameScreen: FC<GameScreenProps> = ({
         {state.isHost && state.phase === "playing" ? (
           <>
             <Button variant="secondary" onClick={onRevealAnswer}>
-              Mostrar Resposta
+              {t("game.reveal")}
             </Button>
             <Button variant="danger" onClick={onEndGame}>
-              Finalitzar Partida
+              {t("game.end")}
             </Button>
           </>
         ) : null}
         {state.isHost && state.phase === "round-results" ? (
           <Button variant="danger" onClick={onEndGame}>
-            Finalitzar Partida
+            {t("game.end")}
           </Button>
         ) : null}
         {state.phase === "round-results" && state.roundResult ? (

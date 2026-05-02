@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { DEFAULT_GAME_CONFIG } from "@geody/shared";
 import { useSocket } from "./hooks/useSocket.js";
 import { useGame } from "./hooks/useGame.js";
+import { useI18n } from "./i18n/I18nProvider.js";
 import { HomeScreen, HostLobby, PlayerLobby } from "./components/Lobby/index.js";
 import { FinalResults, GameScreen } from "./components/Game/index.js";
 
@@ -11,6 +12,7 @@ export default function App() {
   const [view, setView] = useState<AppView>("home");
   const [isHost, setIsHost] = useState(false);
   const hasRequestedRoomRef = useRef(false);
+  const { locale, setLocale, t } = useI18n();
 
   const { socket, connected } = useSocket();
   const { state, actions } = useGame(socket, isHost);
@@ -26,9 +28,7 @@ export default function App() {
     actions.createRoom("ca");
   }, [actions, connected, view]);
 
-  const connectionBanner = !connected ? (
-    <div className="connection-banner">Connectant amb el servidor...</div>
-  ) : null;
+  const connectionBanner = !connected ? <div className="connection-banner">{t("app.connecting")}</div> : null;
 
   if (state.phase === "playing" || state.phase === "round-results") {
     return (
@@ -98,6 +98,8 @@ export default function App() {
     <>
       {connectionBanner}
       <HomeScreen
+        locale={locale}
+        onLocaleChange={setLocale}
         onCreateRoom={() => {
           setIsHost(true);
           setView("host-join");

@@ -1,27 +1,15 @@
 import type { FC } from "react";
 import type { Player } from "@geody/shared";
+import { useI18n } from "../../i18n/I18nProvider.js";
 
 interface ScoreboardProps {
   players: Player[];
-  /** ISO3 del jugador actual: es ressalta a la llista. */
   myPlayerId?: string;
-  /** Mode compacte per a mòbil (overlay o mini-panell lateral). */
   compact?: boolean;
 }
 
-/**
- * Classificació en temps real.
- *
- * Mostra els jugadors ordenats per score descendent.
- * Limita a les primeres 10 posicions (amb scroll si cal).
- * El jugador actual sempre és visible (es puja al primer grup si no hi és).
- * En mode compacte: fons semitransparent, mida reduïda, max 5 posicions.
- *
- * Cada entrada:
- *   #1 [Nom]    1234 pts
- *   ★  [Jo]      987 pts  ← ressaltat
- */
 export const Scoreboard: FC<ScoreboardProps> = ({ players, myPlayerId, compact }) => {
+  const { t } = useI18n();
   const sorted = [...players]
     .filter((player) => !player.isHost)
     .sort((a, b) => b.score - a.score);
@@ -35,7 +23,7 @@ export const Scoreboard: FC<ScoreboardProps> = ({ players, myPlayerId, compact }
 
   return (
     <aside className={compact ? "scoreboard scoreboard--compact" : "scoreboard"}>
-      <h2>Classificació</h2>
+      <h2>{t("game.scoreboard")}</h2>
       <ol>
         {entries.map((player) => (
           <li key={player.id} className={player.id === myPlayerId ? "is-current" : ""}>
@@ -48,3 +36,4 @@ export const Scoreboard: FC<ScoreboardProps> = ({ players, myPlayerId, compact }
     </aside>
   );
 };
+
