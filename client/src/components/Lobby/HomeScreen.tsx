@@ -86,8 +86,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({
           value={locale}
           onChange={(event) => onLocaleChange(event.target.value as UILocale)}
         >
-          <option value="ca">Catala</option>
-          <option value="es">Espanol</option>
+          <option value="ca">Català</option>
+          <option value="es">Español</option>
           <option value="en">English</option>
         </select>
       </div>
@@ -153,6 +153,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({
 
             <div className="tips-card">
               <p className="tips-card__title">{t("home.version.tips")}</p>
+              <p>{t("home.version.tipsMessage")}</p>
               <code>{projectStatus.tipsLightningAddress}</code>
               <img src={tipsQrUrl} alt="Lightning tips QR code" />
             </div>
@@ -162,4 +163,3 @@ export const HomeScreen: FC<HomeScreenProps> = ({
     </main>
   );
 };
-

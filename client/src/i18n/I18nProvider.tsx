@@ -14,9 +14,7 @@ const I18nContext = createContext<I18nContextValue | null>(null);
 function detectInitialLocale(): UILocale {
   const saved = window.localStorage.getItem(STORAGE_KEY);
   if (saved === "ca" || saved === "es" || saved === "en") return saved;
-  const browser = window.navigator.language.toLowerCase();
-  if (browser.startsWith("es")) return "es";
-  if (browser.startsWith("en")) return "en";
+  // Product decision: Catalan is the default locale.
   return "ca";
 }
 
@@ -54,4 +52,3 @@ export function useI18n(): I18nContextValue {
   }
   return context;
 }
-

@@ -104,13 +104,19 @@ export const Globe: FC<GlobeProps> = ({
       }
     };
 
-    Promise.all([loadLod("110m"), loadLod("50m"), loadLod("10m")]).then(([m110, m50, m10]) => {
+    // Load base layer first so globe is visible immediately.
+    loadLod("110m").then((m110) => {
       if (cancelled) return;
-      setFeaturesByLod({
-        "110m": m110,
-        "50m": m50,
-        "10m": m10,
-      });
+      setFeaturesByLod((previous) => ({ ...previous, "110m": m110 }));
+    });
+    // Higher LODs load progressively in background.
+    loadLod("50m").then((m50) => {
+      if (cancelled) return;
+      setFeaturesByLod((previous) => ({ ...previous, "50m": m50 }));
+    });
+    loadLod("10m").then((m10) => {
+      if (cancelled) return;
+      setFeaturesByLod((previous) => ({ ...previous, "10m": m10 }));
     });
 
     return () => {

@@ -15,6 +15,7 @@ type MessageKey =
   | "home.version.changelog"
   | "home.version.portfolio"
   | "home.version.tips"
+  | "home.version.tipsMessage"
   | "home.language"
   | "lobby.room"
   | "lobby.waitingHost"
@@ -90,6 +91,8 @@ export const messages: Record<UILocale, Messages> = {
     "home.version.changelog": "Historial de versions",
     "home.version.portfolio": "Portfolio",
     "home.version.tips": "Propina Lightning",
+    "home.version.tipsMessage":
+      "Tots els meus projectes son open source. Si t'ha agradat o t'ha aportat valor, pots ajudar compartint-lo o, si vols, deixar una propina via LN.",
     "home.language": "Idioma",
     "lobby.room": "Sala",
     "lobby.waitingHost": "Esperant que el professor inicii la partida...",
@@ -162,6 +165,8 @@ export const messages: Record<UILocale, Messages> = {
     "home.version.changelog": "Historial de versiones",
     "home.version.portfolio": "Portfolio",
     "home.version.tips": "Propina Lightning",
+    "home.version.tipsMessage":
+      "Todos mis proyectos son open source. Si te ha gustado o te ha aportado valor, puedes ayudar compartiendolo o, si quieres, dejar una propina por LN.",
     "home.language": "Idioma",
     "lobby.room": "Sala",
     "lobby.waitingHost": "Esperando a que el profesor inicie la partida...",
@@ -234,6 +239,8 @@ export const messages: Record<UILocale, Messages> = {
     "home.version.changelog": "Version history",
     "home.version.portfolio": "Portfolio",
     "home.version.tips": "Lightning tip",
+    "home.version.tipsMessage":
+      "All my projects are open source. If you liked this one or it gave you value, sharing it helps a lot, and you can also send a tip via LN.",
     "home.language": "Language",
     "lobby.room": "Room",
     "lobby.waitingHost": "Waiting for teacher to start the game...",
@@ -302,4 +309,3 @@ export function formatMessage(
     String(params[token] ?? `{${token}}`)
   );
 }
-
